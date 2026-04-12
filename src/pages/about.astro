@@ -48,10 +48,11 @@ const certifications = [
 ---
 
 <Layout title="About | Douglas Urrea Ocampo">
-  <div class="space-y-10">
+  <div class="space-y-10" data-ui="about-page">
     <section
       class="reveal relative overflow-hidden rounded-2xl border border-success/25 bg-base-200/70 p-6 lg:p-8"
       style="--reveal-delay: 40ms;"
+      data-ui="about-overview"
     >
       <div
         class="pointer-events-none absolute -right-10 -top-10 size-40 rounded-full bg-success/10 blur-2xl"
@@ -87,7 +88,7 @@ const certifications = [
       </p>
     </section>
 
-    <section class="reveal" style="--reveal-delay: 120ms;">
+    <section class="reveal" style="--reveal-delay: 120ms;" data-ui="about-highlights">
       <h2 class="text-2xl font-bold text-base-content">Highlights</h2>
       <div class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {
@@ -106,7 +107,7 @@ const certifications = [
       </div>
     </section>
 
-    <section class="reveal" style="--reveal-delay: 180ms;">
+    <section class="reveal" style="--reveal-delay: 180ms;" data-ui="about-expertise">
       <h2 class="text-2xl font-bold text-base-content">Expertise</h2>
       <div class="mt-5 grid gap-4 lg:grid-cols-3">
         {
@@ -127,7 +128,7 @@ const certifications = [
       </div>
     </section>
 
-    <section class="reveal" style="--reveal-delay: 230ms;">
+    <section class="reveal" style="--reveal-delay: 230ms;" data-ui="about-certifications">
       <h2 class="text-2xl font-bold text-base-content">Certifications</h2>
       <div class="mt-5 grid gap-4 lg:grid-cols-3">
         {
@@ -170,6 +171,7 @@ const certifications = [
     <section
       class="reveal relative overflow-hidden rounded-2xl border border-success/30 bg-base-200 p-6 lg:p-8"
       style="--reveal-delay: 290ms;"
+      data-ui="about-cta"
     >
       <div
         class="pointer-events-none absolute -right-10 -top-10 size-40 rounded-full bg-success/10 blur-2xl"
@@ -205,6 +207,7 @@ const certifications = [
                 <a
                   href={contactEmailHref}
                   class="btn btn-success text-success-content"
+                  data-ui="about-email-cta"
                 >
                   Start a Conversation
                 </a>
@@ -215,6 +218,7 @@ const certifications = [
               target="_blank"
               rel="noopener noreferrer"
               class="btn btn-outline btn-success"
+              data-ui="about-linkedin-cta"
             >
               Follow on LinkedIn
             </a>

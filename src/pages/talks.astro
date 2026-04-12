@@ -12,12 +12,18 @@ const talksByYear = talks.reduce((acc, talk) => {
 }, {} as Record<string, typeof talks>)
 
 const years = Object.keys(talksByYear).sort((a, b) => Number(b) - Number(a))
+
+const toToken = (value: string) =>
+  value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')
 ---
 
 <Layout title="Talks | Douglas Urrea Ocampo">
-  <div class="space-y-12 pb-16">
+  <div class="space-y-12 pb-16" data-ui="talks-page">
     <!-- Header Section -->
-    <section class="reveal relative overflow-hidden rounded-2xl border border-success/25 bg-base-200/70 p-6 lg:p-8" style="--reveal-delay: 40ms;">
+    <section class="reveal relative overflow-hidden rounded-2xl border border-success/25 bg-base-200/70 p-6 lg:p-8" style="--reveal-delay: 40ms;" data-ui="talks-hero">
       <div class="pointer-events-none absolute -right-10 -top-10 size-40 rounded-full bg-success/10 blur-2xl"></div>
       <div class="pointer-events-none absolute -bottom-12 -left-12 size-48 rounded-full bg-primary/10 blur-2xl"></div>
       <div class="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-success/20 via-success/70 to-success/20"></div>
@@ -33,7 +39,7 @@ const years = Object.keys(talksByYear).sort((a, b) => Number(b) - Number(a))
     <!-- Sleek List View -->
     <div class="mt-16 flex flex-col gap-12 lg:gap-20">
       {years.map((year, i) => (
-        <section class="reveal flex flex-col md:flex-row gap-6 md:gap-10 lg:gap-16 items-start" style={`--reveal-delay: ${200 + i * 100}ms;`}>
+        <section class="reveal flex flex-col md:flex-row gap-6 md:gap-10 lg:gap-16 items-start" style={`--reveal-delay: ${200 + i * 100}ms;`} data-ui={`talks-year-${year}`}>
           
           <!-- Elegant Minimalist Year Column (No Sticky) -->
           <div class="md:w-32 lg:w-40 shrink-0">
@@ -44,8 +50,8 @@ const years = Object.keys(talksByYear).sort((a, b) => Number(b) - Number(a))
 
           <!-- List of Talks for the year -->
           <div class="flex flex-col flex-1 border-t border-base-300/60 divide-y divide-base-300/60 w-full">
-            {talksByYear[year].map((talk) => (
-              <article class="group relative py-8 flex flex-col lg:flex-row lg:items-center justify-between gap-6 transition-all duration-300 rounded-none bg-transparent">
+            {talksByYear[year].map((talk, idx) => (
+              <article class="group relative py-8 flex flex-col lg:flex-row lg:items-center justify-between gap-6 transition-all duration-300 rounded-none bg-transparent" data-ui={`talk-card-${year}-${idx + 1}-${toToken(talk.title)}`}>
                 
                 <div class="flex flex-col gap-3 flex-1 lg:pr-8">
                   <!-- Meta data (Date, Event & Location) -->
@@ -82,13 +88,13 @@ const years = Object.keys(talksByYear).sort((a, b) => Number(b) - Number(a))
                 <!-- Action Buttons -->
                 <div class="flex items-center gap-3 shrink-0 mt-2 lg:mt-0">
                   {talk.video && (
-                    <a href={talk.video} target="_blank" rel="noopener noreferrer" class="btn btn-sm h-11 lg:h-10 btn-success text-success-content rounded-full font-bold shadow-sm transition-transform hover:scale-105 gap-2 px-5 border-none">
+                    <a href={talk.video} target="_blank" rel="noopener noreferrer" class="btn btn-sm h-11 lg:h-10 btn-success text-success-content rounded-full font-bold shadow-sm transition-transform hover:scale-105 gap-2 px-5 border-none" data-ui={`talk-watch-${year}-${idx + 1}`}>
                       <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
                       Watch
                     </a>
                   )}
                   {talk.slides && (
-                    <a href={talk.slides} target="_blank" rel="noopener noreferrer" class="btn btn-sm h-11 lg:h-10 hover:bg-success/10 border-base-300 text-base-content rounded-full font-bold hover:text-success hover:border-success/40 transition-transform hover:scale-105 gap-2 px-5">
+                    <a href={talk.slides} target="_blank" rel="noopener noreferrer" class="btn btn-sm h-11 lg:h-10 hover:bg-success/10 border-base-300 text-base-content rounded-full font-bold hover:text-success hover:border-success/40 transition-transform hover:scale-105 gap-2 px-5" data-ui={`talk-slides-${year}-${idx + 1}`}>
                       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
                       Slides
                     </a>

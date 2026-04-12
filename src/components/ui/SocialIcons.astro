@@ -7,7 +7,13 @@ import LinkedIn from '@/assets/social-icons/linkedin-in.svg'
 
 import { social } from '@/settings'
 
-const { compact = false, noWrap = false } = Astro.props
+const { compact = false, noWrap = false, context = 'default' } = Astro.props
+
+const toToken = (value: string) =>
+	value
+		.toLowerCase()
+		.replace(/[^a-z0-9]+/g, '-')
+		.replace(/^-|-$/g, '')
 
 const orderedSocial = [
 	{ href: social.linkedin, label: 'LinkedIn', Icon: LinkedIn },
@@ -23,19 +29,23 @@ const wrapClass = noWrap ? 'flex-nowrap' : 'flex-wrap'
 const gapClass = compact ? 'gap-1.5' : 'gap-2'
 ---
 
-<div class={`flex items-center ${wrapClass} ${gapClass}`}>
+<div class={`flex items-center ${wrapClass} ${gapClass}`} data-ui={`${toToken(context)}-social-links`}>
 	{
-		orderedSocial.map(({ href, label, Icon }) => (
+		orderedSocial.map(({ href, label, Icon }) => {
+			const isExternal = href.startsWith('http')
+
+			return (
 			<a
 				href={href}
-				target='_blank'
-				rel='noopener noreferrer'
+				target={isExternal ? '_blank' : undefined}
+				rel={isExternal ? 'noopener noreferrer' : undefined}
 				aria-label={label}
 				title={label}
+				data-ui={`${toToken(context)}-social-${toToken(label)}`}
 				class={`${calculatedContainerSize} inline-flex items-center justify-center rounded-xl text-base-content/80 hover:bg-success/20 hover:text-success transition-all duration-300`}
 			>
 				<Icon class={calculatedIconSize} fill='currentColor' />
 			</a>
-		))
+		)})
 	}
 </div>

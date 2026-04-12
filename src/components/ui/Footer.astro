@@ -2,7 +2,7 @@
 const brandName = 'Douglas Fugazi'
 ---
 
-<footer class='footer footer-center bg-base-100 text-base-content px-4 py-8'>
+<footer class='footer footer-center bg-base-100 text-base-content px-4 py-8' data-ui='site-footer'>
 	<aside class='space-y-2 text-center'>
 		<p>
 			Copyright © {new Date().getFullYear()} - All rights reserved by {brandName}
@@ -14,6 +14,7 @@ const brandName = 'Douglas Fugazi'
 				class='font-semibold hover:text-success transition-colors'
 				target='_blank'
 				rel='noopener noreferrer'
+				data-ui='footer-link-astro'
 			>
 				Astro
 			</a>
@@ -23,6 +24,7 @@ const brandName = 'Douglas Fugazi'
 				class='font-semibold hover:text-success transition-colors'
 				target='_blank'
 				rel='noopener noreferrer'
+				data-ui='footer-link-playwright'
 			>
 				Playwright
 			</a>

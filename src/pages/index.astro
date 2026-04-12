@@ -14,7 +14,7 @@ const contactEmailHref = social.email
 
 <Layout>
   <!-- Hero Section -->
-  <section class="flex items-center gap-8 xl:gap-12 border-b pb-12">
+  <section class="flex items-center gap-8 xl:gap-12 border-b pb-12" data-ui="home-hero-section">
     <Hero
       fullName={fullName}
       title={title}
@@ -24,12 +24,12 @@ const contactEmailHref = social.email
   </section>
 
   <!-- Core Skills -->
-  <section class="py-12 border-b">
+  <section class="py-12 border-b" data-ui="home-core-skills-section">
     <CoreSkills sectionTitle="Core Skills" categories={core_skills} />
   </section>
 
   <!-- Contact Call To Action -->
-  <section class="py-12 border-t">
+  <section class="py-12 border-t" data-ui="home-cta-section">
     <div
       class="relative overflow-hidden rounded-3xl border border-success/30 bg-base-200/80 p-8 lg:p-10"
     >
@@ -63,6 +63,7 @@ const contactEmailHref = social.email
               target="_blank"
               rel="noopener noreferrer"
               class="ml-1 font-semibold text-success underline-offset-4 hover:underline"
+              data-ui="home-linkedin-inline"
             >
               https://www.linkedin.com/in/douglasfugazi/
             </a>
@@ -85,6 +86,7 @@ const contactEmailHref = social.email
                 <a
                   href={contactEmailHref}
                   class="btn btn-success text-success-content"
+                  data-ui="home-email-cta"
                 >
                   Email Me
                 </a>
@@ -95,6 +97,7 @@ const contactEmailHref = social.email
               target="_blank"
               rel="noopener noreferrer"
               class="btn btn-outline btn-success"
+              data-ui="home-linkedin-cta"
             >
               Connect on LinkedIn
             </a>

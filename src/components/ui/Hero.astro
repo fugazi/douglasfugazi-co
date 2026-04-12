@@ -6,7 +6,7 @@ import SocialIcons from './SocialIcons.astro'
 
 const {fullName, title, institute, profilePicture} = Astro.props
 ---
-<div class='hero-copy flex-1'>
+<div class='hero-copy flex-1' data-ui='hero-copy'>
   <h1 class='text-3xl xl:text-4xl leading-tight font-bold mb-4'>
     <span class='block'>Welcome!</span>
     <span class='block'>
@@ -21,16 +21,17 @@ const {fullName, title, institute, profilePicture} = Astro.props
     With over 14 years of experience, I build robust Playwright and Selenium frameworks powered by AI-driven testing for global teams.
   </p>
   <div class='flex gap-4'>
-    <SocialIcons />
+    <SocialIcons context='hero' />
   </div>
 </div>
-<div class='hero-photo hidden lg:block shrink-0'>
+<div class='hero-photo hidden lg:block shrink-0' data-ui='hero-photo'>
   <div class='size-64 xl:size-72 rounded-full bg-[linear-gradient(135deg,#2af4ce_0%,#1de2bc_45%,#13c7a3_100%)] p-[5px] shadow-[0_0_1px_14px_rgba(29,226,188,0.22)]'>
     <div class='size-full rounded-full overflow-hidden bg-base-100'>
       <Image
         src={profilePicture}
-        alt={fullName}
+        alt={`Portrait of ${fullName}`}
         class='hero-image-static w-full h-full object-cover object-[center_20%]'
+        data-ui='hero-profile-image'
       />
     </div>
   </div>

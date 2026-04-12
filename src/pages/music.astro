@@ -45,14 +45,21 @@ const musicProfiles = [
     Icon: DeezerIcon,
   },
 ];
+
+const toToken = (value: string) =>
+  value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
 ---
 
 <Layout title="Music | Douglas Fugazi">
-  <div class="space-y-12 pb-16">
+  <div class="space-y-12 pb-16" data-ui="music-page">
     <!-- Header Section -->
     <section
       class="reveal relative overflow-hidden rounded-2xl border border-success/25 bg-base-200/70 p-6 lg:p-8"
       style="--reveal-delay: 40ms;"
+      data-ui="music-hero"
     >
       <div
         class="pointer-events-none absolute -right-10 -top-10 size-40 rounded-full bg-success/10 blur-2xl"
@@ -86,6 +93,7 @@ const musicProfiles = [
           target="_blank"
           rel="noopener noreferrer"
           class="font-medium text-success hover:underline"
+          data-ui="music-monofonicos-link"
           >Monofonicos Netlabel</a
         > has been fundamental to the Latin American scene.
       </p>
@@ -105,6 +113,7 @@ const musicProfiles = [
                 rel="noopener noreferrer"
                 aria-label={`Open ${label} profile`}
                 title={label}
+                data-ui={`music-streaming-link-${toToken(label)}`}
                 class="group inline-flex items-center gap-2 rounded-full border border-base-300/75 bg-base-100/90 px-3 py-1.5 text-xs font-semibold text-base-content/80 shadow-[0_1px_6px_rgba(0,0,0,0.03)] transition-all duration-300 hover:border-success/35 hover:text-success hover:shadow-[0_6px_18px_rgba(34,197,94,0.12)]"
               >
                 <span class="inline-flex size-6 shrink-0 items-center justify-center rounded-full border border-success/20 bg-success/10">
@@ -123,7 +132,7 @@ const musicProfiles = [
     </section>
 
     <!-- Content Section -->
-    <section class="reveal mt-12" style="--reveal-delay: 100ms;">
+    <section class="reveal mt-12" style="--reveal-delay: 100ms;" data-ui="music-embeds">
       <h2
         class="mb-8 text-center text-2xl font-bold tracking-tight text-base-content lg:text-left"
       >
@@ -136,6 +145,7 @@ const musicProfiles = [
         >
           <iframe
             data-testid="embed-iframe"
+            data-ui="music-spotify-embed"
             title="Douglas Fugazi - Spotify Artist Profile"
             class="bg-base-100 block w-full rounded-[10px]"
             style="border-radius: 12px; display: block; border: none; outline: none;"
@@ -184,6 +194,7 @@ const musicProfiles = [
           class="overflow-hidden rounded-[14px] border border-success/25 bg-base-200/50 p-[2px] transition-shadow duration-300 hover:shadow-[0_0_30px_rgba(34,197,94,0.3)] lg:mt-2 lg:p-1"
         >
           <iframe
+            data-ui="music-bandcamp-embed"
             title="Douglas Fugazi - Bandcamp Featured Release"
             class="bg-base-100 block w-full rounded-[10px]"
             style="border-radius: 12px; border: 0; outline: none;"

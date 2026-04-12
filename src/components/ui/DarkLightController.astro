@@ -1,13 +1,16 @@
 ---
-import {template} from  '../../settings.ts'
+import { template } from '../../settings.ts'
 ---
 
-<label class="grid cursor-pointer place-items-center" transition:persist>
+<label class="grid cursor-pointer place-items-center" transition:persist aria-label="Toggle color theme" data-ui="theme-toggle-label">
   <input
     type="checkbox"
     value={template.darkTheme}
     class="toggle theme-controller bg-base-content col-span-2 col-start-1 row-start-1"
     data-choose-theme
+    aria-label="Toggle color theme"
+    role="switch"
+    data-ui="theme-toggle"
 />
   <svg
     class="stroke-base-100 fill-base-100 col-start-1 row-start-1"

@@ -33,17 +33,29 @@ const {
 
 	</head>
 	<body>
-		<div class={`bg-base-100 drawer lg:drawer-open ${template.menu_left ? 'drawer-end' : ''}`}>
-			<input id='my-drawer' type='checkbox' class='drawer-toggle' />
+		<a
+			href='#main-content'
+			class='sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-base-100 focus:px-4 focus:py-2 focus:text-base-content focus:ring-2 focus:ring-success'
+			data-ui='skip-to-main'
+		>
+			Skip to main content
+		</a>
+		<div class={`bg-base-100 drawer lg:drawer-open ${template.menu_left ? 'drawer-end' : ''}`} data-ui='app-shell'>
+			<input id='my-drawer' type='checkbox' class='drawer-toggle' data-ui='drawer-toggle' />
 			<!-- Drawer content -->
             <div class='drawer-content bg-base-100'>
-				<div class='bg-base-100 z-50 text-base-content shadow-sm'>
-					<nav class='navbar'>
+				<header class='bg-base-100 z-50 text-base-content shadow-sm' data-ui='top-header'>
+					<nav class='navbar' aria-label='Top navigation' data-ui='top-nav'>
 						<div class='navbar-start'>
 							{template.menu_left &&
 								<DarkLightController/>
 							}
-							<label for='my-drawer' class='btn btn-square btn-ghost lg:hidden'>
+							<label
+								for='my-drawer'
+								class='btn btn-square btn-ghost lg:hidden'
+								aria-label='Open sidebar menu'
+								data-ui='drawer-open-button'
+							>
 								<BetterIcon>
 									<svg
 										xmlns='http://www.w3.org/2000/svg'
@@ -70,16 +82,17 @@ const {
 							}
 						</div>
 					</nav>
-				</div>
-                <main class='p-8 pt-10 lg:pt-16 lg:max-w-5xl max-w-full mx-auto min-h-screen flex flex-col justify-between'>
+				</header>
+                <main id='main-content' tabindex='-1' class='p-8 pt-10 lg:pt-16 lg:max-w-5xl max-w-full mx-auto min-h-screen flex flex-col justify-between' data-ui='main-content'>
 					<!-- Page content -->
 					<slot />
 				<Footer />
 				</main>
 			</div>
 			<!-- Drawer side -->
-			<div class='drawer-side z-40'>
+			<div class='drawer-side z-40' data-ui='drawer-side'>
 				<label for='my-drawer' aria-label='close sidebar' class='drawer-overlay'
+					data-ui='drawer-overlay'
 				></label>
 				<Navbar />
 			</div>

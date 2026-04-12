@@ -36,15 +36,18 @@ const isActiveRoute = (href: string) => normalizePath(href) === currentPath
 ---
 <aside
 	class='px-4 pt-4 h-screen w-[20rem] bg-base-200 text-base-content flex flex-col'
+	aria-label='Primary sidebar'
+	data-ui='sidebar'
 >
 	<div class='flex flex-col my-8 justify-between h-full'>
 		<div>
-				<div class='flex justify-center items-center flex-col'>
+				<div class='flex justify-center items-center flex-col' data-ui='sidebar-profile'>
 					<div class='size-44 rounded-full bg-[linear-gradient(135deg,#2af4ce_0%,#1de2bc_45%,#13c7a3_100%)] p-[3px] shadow-[0_0_1px_11px_rgba(29,226,188,0.2)]'>
 						<Image
 							class='navbar-image-static size-full rounded-full object-cover object-[center_20%]'
 							src={ProfilePictures}
 							alt={`Profile picture of ${fullName}`}
+							data-ui='sidebar-profile-image'
 						/>
 					</div>
 				<div class="mt-6 hidden lg:block text-center">
@@ -57,15 +60,17 @@ const isActiveRoute = (href: string) => normalizePath(href) === currentPath
 				</div>
 			</div>
 			<div class='mx-auto mt-12 w-full max-w-[14.5rem]'>
-				<ul class='menu grow shrink menu-md overflow-y-auto text-base'>
+				<ul class='menu grow shrink menu-md overflow-y-auto text-base' data-ui='sidebar-nav-list'>
 					{navItems.map((item) => {
 						const isActive = isActiveRoute(item.href)
+						const itemToken = item.label.toLowerCase().replace(/[^a-z0-9]+/g, '-')
 
 						return (
-							<li class='mx-1 border-b border-base-content/15 first:border-t'>
+							<li class='mx-1 border-b border-base-content/15 first:border-t' data-ui={`sidebar-nav-item-${itemToken}`}>
 								<a
 									href={item.href}
 									aria-current={isActive ? 'page' : undefined}
+									data-ui={`sidebar-nav-link-${itemToken}`}
 									class:list={[
 										'menu-link px-2 py-2.5 text-[1.02rem] font-medium transition-colors duration-200 text-center justify-center',
 										'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-base-200',
@@ -83,7 +88,7 @@ const isActiveRoute = (href: string) => normalizePath(href) === currentPath
 			</div>
 		</div>
 		<div class='mx-4'>
-			<SocialIcons compact noWrap />
+			<SocialIcons compact noWrap context='sidebar' />
 		</div>
 	</div>
 </aside>
