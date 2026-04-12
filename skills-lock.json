@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "skills": {
+    "a11y-playwright-testing": {
+      "source": "fugazi/test-automation-skills-agents",
+      "sourceType": "github",
+      "computedHash": "14629b92a76d85a9074a887f1930041e1ce268d5f80e40c0659066fd04c19a35"
+    },
+    "playwright-cli": {
+      "source": "fugazi/test-automation-skills-agents",
+      "sourceType": "github",
+      "computedHash": "b59ec572042f6191e62c2fcf11623846769bfdf26582540daf0ddd69bf401be3"
+    },
+    "playwright-e2e-testing": {
+      "source": "fugazi/test-automation-skills-agents",
+      "sourceType": "github",
+      "computedHash": "f13a882ba10643bfb1fa81effa3d8f117bc7cb1bcf138e736bd05ac54891e94b"
+    },
+    "qa-test-planner": {
+      "source": "fugazi/test-automation-skills-agents",
+      "sourceType": "github",
+      "computedHash": "25b95d2715f3ab2a6a4b8aeea72f6d48cd66408d9df6371b5ef7c24cdb0801df"
+    },
+    "webapp-playwright-testing": {
+      "source": "fugazi/test-automation-skills-agents",
+      "sourceType": "github",
+      "computedHash": "76542bc0375aa1c8dd144a21d521c54e604e32198ec3a075b3ba84110f295775"
+    }
+  }
+}

@@ -30,3 +30,6 @@ pnpm-debug.log*
 .squad/agents/*/history.md
 # Squad: SubSquad activation file (local to this machine)
 .squad-workstream
+
+# Claude local machine settings
+.claude/settings.local.json
