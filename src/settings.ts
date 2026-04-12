@@ -64,7 +64,10 @@ export const template = {
 }
 
 export const seo = {
-	default_title: 'Douglas Urrea Ocampo - Senior QA Automation Engineer from Medellín, Colombia',
-	default_description: 'Personal website of Douglas Urrea Ocampo, a Senior QA Automation Engineer from Medellín, Colombia. Explore my projects, work collaborations, and connect with me on social media.',
+	default_title: 'QA Automation Engineer | AI-Driven Testing | Douglas Urrea Ocampo (Open to Work)',
+	default_description:
+		'Senior QA Automation Engineer focused on AI-Driven Testing. I build scalable Playwright and Selenium frameworks for E2E and API quality. Open to Work.',
 	default_image: '/images/og-default.jpg',
+	default_keywords:
+		'QA Automation Engineer, AI-Driven Testing, Playwright, Selenium, E2E Testing, API Testing, Open to Work',
 }

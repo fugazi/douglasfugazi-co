@@ -13,12 +13,16 @@ type Props = {
 	title?: string
 	description?: string
 	image?: string
+	robots?: string
+	keywords?: string
 }
 
 const {
 	title = seo.default_title,
 	description = seo.default_description,
 	image = seo.default_image,
+	robots = 'index,follow,max-image-preview:large',
+	keywords = seo.default_keywords,
 } = Astro.props
 ---
 
@@ -27,7 +31,7 @@ const {
 	<head>
 		{template.transitions && <ClientRouter /> }
 
-		<Head title={title} description={description} image={image} />
+		<Head title={title} description={description} image={image} robots={robots} keywords={keywords} />
 
 
 

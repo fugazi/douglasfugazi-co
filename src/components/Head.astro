@@ -1,28 +1,80 @@
 ---
-import { profile, template } from '@/settings'
+import { profile, seo, social, template } from '@/settings'
 interface Props {
 	title: string
 	description: string
 	image: string
+  robots?: string
+  keywords?: string
 }
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+const siteURL = Astro.site ?? new URL(template.website_url)
+const canonicalURL = new URL(Astro.url.pathname, siteURL)
 
-const { title, description, image } = Astro.props
+const {
+  title,
+  description,
+  image,
+  robots = 'index,follow,max-image-preview:large',
+  keywords = seo.default_keywords,
+} = Astro.props
+
+const imageURL = new URL(image, siteURL)
+const profileURL = new URL(template.base || '/', siteURL)
+const llmsURL = new URL(`${template.base}/llms.txt`, siteURL)
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      name: profile.fullName,
+      jobTitle: 'Senior QA Automation Engineer',
+      description,
+      url: profileURL.toString(),
+      image: imageURL.toString(),
+      sameAs: [social.linkedin, social.github, social.instagram].filter(Boolean),
+      knowsAbout: [
+        'QA Automation',
+        'AI-Driven Testing',
+        'Playwright',
+        'Selenium',
+        'API Testing',
+        'CI/CD Quality Engineering',
+      ],
+    },
+    {
+      '@type': 'ProfessionalService',
+      name: 'QA Automation and AI-Driven Testing Services',
+      description,
+      url: profileURL.toString(),
+      provider: {
+        '@type': 'Person',
+        name: profile.fullName,
+      },
+      areaServed: 'Global',
+    },
+  ],
+}
 ---
 
 <meta charset='utf-8' />
 <meta name='viewport' content='width=device-width,initial-scale=1' />
-<link
-	rel='icon'
-	type='image/svg+xml'
-	href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>'
-/>
+<link rel='icon' href={`${template.base}/favicon.ico`} sizes='any' />
+<link rel='shortcut icon' href={`${template.base}/favicon.ico`} />
+<link rel='icon' type='image/png' sizes='32x32' href={`${template.base}/favicon-32x32.png`} />
+<link rel='icon' type='image/png' sizes='16x16' href={`${template.base}/favicon-16x16.png`} />
+<link rel='icon' type='image/svg+xml' href={`${template.base}/favicon.svg`} />
+<link rel='apple-touch-icon' sizes='180x180' href={`${template.base}/apple-touch-icon.png`} />
+<link rel='manifest' href={`${template.base}/site.webmanifest`} />
 <meta name='generator' content={Astro.generator} />
 <meta name='default-theme' content={template.lightTheme} />
+<meta name='theme-color' content='#0a1624' />
+<meta name='format-detection' content='telephone=no' />
 
 <!-- Sitemap -->
 <link rel="sitemap" href={`${template.base}/sitemap-index.xml`} />
+<link rel='alternate' type='text/plain' href={llmsURL.toString()} title='LLMs.txt' />
 
 <!-- Canonical URL -->
 <link rel='canonical' href={canonicalURL} />
@@ -31,26 +83,31 @@ const { title, description, image } = Astro.props
 <title>{title}</title>
 <meta name='title' content={title} />
 <meta name='description' content={description} />
-<meta name='robots' content='index,follow,max-image-preview:large' />
+<meta name='keywords' content={keywords} />
+<meta name='robots' content={robots} />
 <meta name='author' content={profile.fullName} />
 
 <!-- Open Graph / Facebook -->
 <meta property='og:type' content='website' />
-<meta property='og:url' content={Astro.url} />
+<meta property='og:url' content={canonicalURL} />
 <meta property='og:site_name' content={profile.fullName} />
 <meta property='og:locale' content='es_CO' />
 <meta property='og:title' content={title} />
 <meta property='og:description' content={description} />
-<meta property='og:image' content={new URL(image, Astro.url)} />
+<meta property='og:image' content={imageURL} />
+<meta property='og:image:width' content='1200' />
+<meta property='og:image:height' content='630' />
 <meta property='og:image:alt' content={title} />
 
 <!-- Twitter -->
 <meta property='twitter:card' content='summary_large_image' />
-<meta property='twitter:url' content={Astro.url} />
+<meta property='twitter:url' content={canonicalURL} />
 <meta property='twitter:title' content={title} />
 <meta property='twitter:description' content={description} />
-<meta property='twitter:image' content={new URL(image, Astro.url)} />
+<meta property='twitter:image' content={imageURL} />
 <meta property='twitter:image:alt' content={title} />
+
+<script type='application/ld+json' set:html={JSON.stringify(personSchema)} />
 
 <!-- Theme selector scripts -->
 <script is:inline>
