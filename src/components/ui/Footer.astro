@@ -1,23 +1,32 @@
 ---
-import { profile } from '../../settings'
-
-const { fullName } = profile
+const brandName = 'Douglas Fugazi'
 ---
 
 <footer class='footer footer-center bg-base-100 text-base-content px-4 py-8'>
-	<aside>
+	<aside class='space-y-2 text-center'>
 		<p>
-			Copyright © {new Date().getFullYear()} - All right reserved by {fullName}
+			Copyright © {new Date().getFullYear()} - All rights reserved by {brandName}
 		</p>
-		<p>
-			Built with <a
-				href='https://github.com/maiobarbero/astro_academia'
-				class='font-bold'
-				target='_blank'>Astro Academia</a
-			> 🎓 by <a
-				href='http://maiobarbero.dev'
-        class="font-bold"
-				target='_blank'>Matteo Barbero</a>
+		<p class='text-base-content/75'>
+			Built with{' '}
+			<a
+				href='https://astro.build/'
+				class='font-semibold hover:text-success transition-colors'
+				target='_blank'
+				rel='noopener noreferrer'
+			>
+				Astro
+			</a>
+			, tested with{' '}
+			<a
+				href='https://playwright.dev/'
+				class='font-semibold hover:text-success transition-colors'
+				target='_blank'
+				rel='noopener noreferrer'
+			>
+				Playwright
+			</a>
+			, and made with 💚 from Medellin, Colombia.
 		</p>
 	</aside>
 </footer>

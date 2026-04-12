@@ -1,40 +1,70 @@
 export const profile = {
-	fullName: 'Your Name',
-	title: '',
+	fullName: 'Douglas Urrea Ocampo',
+	title: 'Senior QA Automation Engineer from Medellín, Colombia.',
 	institute: '',
-	author_name: '', // Author name to be highlighted in the papers section
-	research_areas: [
-		// { title: 'Physics', description: 'Brief description of the research interest', field: 'physics' },
+	core_skills: [
+		{
+			title: 'Test Automation Frameworks',
+			items: [
+				'Playwright',
+				'Selenium WebDriver',
+				'Cypress',
+				'Rest-Assured',
+				'JUnit',
+				'TestNG',
+				'Cucumber',
+			],
+		},
+		{
+			title: 'AI-Assisted Testing & Development',
+			items: [
+				'Claude Code',
+				'OpenAI Codex',
+				'GitHub Copilot',
+				'OpenCode',
+				'LLM Prompting',
+			],
+		},
+		{
+			title: 'Programming Languages',
+			items: ['Java', 'TypeScript', 'JavaScript', 'SQL', 'JSON'],
+		},
+		{
+			title: 'CI/CD & DevOps',
+			items: ['Docker', 'Jenkins', 'GitHub Actions', 'AWS', 'Azure DevOps', 'Grafana'],
+		},
+		{
+			title: 'Testing Platforms',
+			items: ['BrowserStack', 'SauceLabs', 'Swagger', 'Lighthouse'],
+		},
+		{
+			title: 'Tools',
+			items: ['Git', 'GitHub', 'Postman', 'Jira', 'Confluence', 'Maven', 'IntelliJ IDEA'],
+		},
 	],
 }
 
 // Set equal to an empty string to hide the icon that you don't want to display
 export const social = {
-	email: '',
-	linkedin: '',
-	x: 'https://www.x.com/',
-	bluesky: '',
-	github: '',
-	gitlab: '',
-	scholar: '',
-	inspire: '',
-	arxiv: '',
-	orcid: '',
+	linkedin: 'https://www.linkedin.com/in/douglasfugazi',
+	github: 'https://github.com/fugazi',
+	instagram: 'https://www.instagram.com/douglasfugazi',
+	bandcamp: 'https://monofonicos.bandcamp.com/album/mnf050-douglas-fugazi-mar-de-la-tranquilidad',
+
+	email: 'info@douglasfugazi.co',
 }
 
 export const template = {
-	website_url: 'https://localhost:4321', // Astro needs to know your site’s deployed URL to generate a sitemap. It must start with http:// or https://
+	website_url: 'https://douglasfugazi.co', // Astro needs to know your deployed URL to generate canonical URLs and sitemap entries.
 	menu_left: false,
 	transitions: true,
-	lightTheme: 'light', // Select one of the Daisy UI Themes or create your own
-	darkTheme: 'dark', // Select one of the Daisy UI Themes or create your own
-	excerptLength: 200,
-	postPerPage: 5,
-    base: '' // Repository name starting with /
+	lightTheme: 'corporate', // Professional light theme
+	darkTheme: 'business', // Professional dark theme
+	base: '', // Repository name starting with /
 }
 
 export const seo = {
-	default_title: 'Astro Academia',
-	default_description: 'Astro Academia is a template for academic websites.',
-	default_image: '/images/astro-academia.png',
+	default_title: 'Douglas Urrea Ocampo - Senior QA Automation Engineer from Medellín, Colombia',
+	default_description: 'Personal website of Douglas Urrea Ocampo, a Senior QA Automation Engineer from Medellín, Colombia. Explore my projects, work collaborations, and connect with me on social media.',
+	default_image: '/images/og-default.jpg',
 }

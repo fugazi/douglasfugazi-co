@@ -1,52 +1,106 @@
 ---
-import { Image } from 'astro:assets'
-import {profile} from '../../settings'
-import SocialIcons from './SocialIcons.astro'
-import ProfilePictures from '@/assets/profile_pictures.jpg'
-import { getCollection } from 'astro:content'
+import ProfilePictures from '@/assets/Douglas_2026.jpg'
 import { template } from '@/settings'
+import { Image } from 'astro:assets'
+import { profile } from '../../settings'
+import SocialIcons from './SocialIcons.astro'
 
-const isBlogPopulated = await getCollection('blog').then(collection => collection.length > 0)
+const {fullName} = profile
 
-const {fullName, title} = profile
+const trimTrailingSlash = (value: string) =>
+	value.length > 1 && value.endsWith('/') ? value.slice(0, -1) : value
+
+const normalizePath = (path: string) => {
+	const base = template.base && template.base !== '/' ? trimTrailingSlash(template.base) : ''
+	let normalized = trimTrailingSlash(path || '/')
+
+	if (base && normalized.startsWith(base)) {
+		normalized = normalized.slice(base.length) || '/'
+	}
+
+	return normalized || '/'
+}
+
+const currentPath = normalizePath(Astro.url.pathname)
+
+const navItems = [
+	{ label: 'Home', href: `${template.base}/` },
+	{ label: 'About', href: `${template.base}/about` },
+	{ label: 'Projects', href: `${template.base}/projects` },
+	{ label: 'Talks', href: `${template.base}/talks` },
+	{ label: 'Music', href: `${template.base}/music` },
+	{ label: 'Contact', href: `${template.base}/contact` },
+]
+
+const isActiveRoute = (href: string) => normalizePath(href) === currentPath
 ---
 <aside
 	class='px-4 pt-4 h-screen w-[20rem] bg-base-200 text-base-content flex flex-col'
 >
 	<div class='flex flex-col my-8 justify-between h-full'>
 		<div>
-			<div class='flex justify-center items-center flex-col'>
-				<Image
-					class='mask mask-circle size-44'
-					src={ProfilePictures}
-					alt={`Profile picture of ${fullName}`}
-				/>
-				<h1 class="text-lg font-black mt-8 hidden lg:block">{title} <span>{fullName}</span></h1>
+				<div class='flex justify-center items-center flex-col'>
+					<div class='size-44 rounded-full bg-[linear-gradient(135deg,#2af4ce_0%,#1de2bc_45%,#13c7a3_100%)] p-[3px] shadow-[0_0_1px_11px_rgba(29,226,188,0.2)]'>
+						<Image
+							class='navbar-image-static size-full rounded-full object-cover object-[center_20%]'
+							src={ProfilePictures}
+							alt={`Profile picture of ${fullName}`}
+						/>
+					</div>
+				<div class="mt-6 hidden lg:block text-center">
+					<h1 class="text-base font-semibold tracking-tight text-base-content/90">
+						{fullName}
+					</h1>
+					<p class="mt-1 text-sm font-medium tracking-wide text-base-content/60">
+						Senior QA Automation Engineer
+					</p>
+				</div>
 			</div>
-			<div class='mx-4 mt-16'>
-				<ul class='space-y-4 menu grow shrink menu-md overflow-y-auto'>
-					<li>
-                        <a href={`${template.base}/`} class='text-lg'>Home</a>
-					</li>
-					<li>
-                        <a href={`${template.base}/research`} class='text-lg'>Research</a>
-					</li>
-					<li>
-                        <a href={`${template.base}/papers`} class='text-lg'>Papers</a>
-					</li>
-					<li>
-                        <a href={`${template.base}/cv`} class='text-lg'>CV</a>
-                    </li>
-                    {isBlogPopulated &&
-					<li>
-                        <a href={`${template.base}/blog/1`} class='text-lg'>Blog</a>
-</li>
-                    }
+			<div class='mx-auto mt-12 w-full max-w-[14.5rem]'>
+				<ul class='menu grow shrink menu-md overflow-y-auto text-base'>
+					{navItems.map((item) => {
+						const isActive = isActiveRoute(item.href)
+
+						return (
+							<li class='mx-1 border-b border-base-content/15 first:border-t'>
+								<a
+									href={item.href}
+									aria-current={isActive ? 'page' : undefined}
+									class:list={[
+										'menu-link px-2 py-2.5 text-[1.02rem] font-medium transition-colors duration-200 text-center justify-center',
+										'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-base-200',
+										isActive
+											? 'bg-success/10 text-success hover:bg-success/10'
+											: 'text-base-content/75 hover:text-base-content',
+									]}
+								>
+									{item.label}
+								</a>
+							</li>
+						)
+					})}
 				</ul>
 			</div>
 		</div>
 		<div class='mx-4'>
-			<SocialIcons/>
+			<SocialIcons compact noWrap />
 		</div>
 	</div>
 </aside>
+
+<style>
+	.navbar-image-static {
+		animation: none !important;
+		transform: none !important;
+		filter: none !important;
+	}
+
+	.menu-link {
+		-webkit-tap-highlight-color: transparent;
+	}
+
+	.menu-link:active {
+		background-color: hsl(var(--su) / 0.14) !important;
+		color: hsl(var(--su)) !important;
+	}
+</style>
