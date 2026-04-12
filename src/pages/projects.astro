@@ -261,6 +261,7 @@ const guidancePaths = [
               title="TestPilot.AI - Copilot SDK - Test Automation AI Agents" 
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
               referrerpolicy="strict-origin-when-cross-origin"
+              loading="lazy"
               allowfullscreen>
             </iframe>
           </div>
@@ -285,6 +286,7 @@ const guidancePaths = [
               title="Test Automation AI Agents & Skills" 
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
               referrerpolicy="strict-origin-when-cross-origin"
+              loading="lazy"
               allowfullscreen>
             </iframe>
           </div>
@@ -309,6 +311,7 @@ const guidancePaths = [
               title="Playwright with OpenCode - Test Automation AI Agents" 
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
               referrerpolicy="strict-origin-when-cross-origin"
+              loading="lazy"
               allowfullscreen>
             </iframe>
           </div>
@@ -333,6 +336,7 @@ const guidancePaths = [
               title="Playwright with Codex - Test Automation AI Agents" 
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
               referrerpolicy="strict-origin-when-cross-origin"
+              loading="lazy"
               allowfullscreen>
             </iframe>
           </div>
@@ -393,10 +397,37 @@ const guidancePaths = [
 
 <script>
   function initTabs() {
-    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabBtns = document.querySelectorAll<HTMLButtonElement>('.tab-btn');
     const tabPanels = document.querySelectorAll('.tab-panel');
 
     if (!tabBtns.length) return;
+
+    function activateTab(targetBtn: HTMLButtonElement) {
+      const allBtns = document.querySelectorAll<HTMLButtonElement>('.tab-btn');
+      allBtns.forEach((b) => {
+        b.classList.remove('bg-base-100', 'text-success', 'shadow-[0_2px_8px_rgba(0,0,0,0.06)]');
+        b.classList.add('text-base-content/70');
+        b.setAttribute('aria-selected', 'false');
+      });
+
+      targetBtn.classList.add('bg-base-100', 'text-success', 'shadow-[0_2px_8px_rgba(0,0,0,0.06)]');
+      targetBtn.classList.remove('text-base-content/70');
+      targetBtn.setAttribute('aria-selected', 'true');
+
+      tabPanels.forEach((panel) => {
+        panel.classList.add('hidden');
+        panel.classList.remove('tab-panel-active');
+      });
+
+      const targetId = targetBtn.getAttribute('data-tab');
+      const targetPanel = document.getElementById(`panel-${targetId}`);
+      if (targetPanel) {
+        targetPanel.classList.remove('hidden');
+        // Force reflow
+        void targetPanel.offsetWidth;
+        targetPanel.classList.add('tab-panel-active');
+      }
+    }
 
     tabBtns.forEach((btn) => {
       // Create a clone to remove old event listeners from astro view transitions
@@ -404,30 +435,32 @@ const guidancePaths = [
       btn.parentNode?.replaceChild(clonedBtn, btn);
 
       clonedBtn.addEventListener('click', () => {
-        const allBtns = document.querySelectorAll('.tab-btn');
-        allBtns.forEach((b) => {
-          b.classList.remove('bg-base-100', 'text-success', 'shadow-[0_2px_8px_rgba(0,0,0,0.06)]');
-          b.classList.add('text-base-content/70');
-          b.setAttribute('aria-selected', 'false');
-        });
+        activateTab(clonedBtn);
+      });
 
-        clonedBtn.classList.add('bg-base-100', 'text-success', 'shadow-[0_2px_8px_rgba(0,0,0,0.06)]');
-        clonedBtn.classList.remove('text-base-content/70');
-        clonedBtn.setAttribute('aria-selected', 'true');
+      clonedBtn.addEventListener('keydown', (event) => {
+        const navKeys = ['ArrowRight', 'ArrowLeft', 'Home', 'End'];
+        if (!navKeys.includes(event.key)) return;
 
-        tabPanels.forEach((panel) => {
-          panel.classList.add('hidden');
-          panel.classList.remove('tab-panel-active');
-        });
+        event.preventDefault();
+        const currentBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('.tab-btn'));
+        const currentIndex = currentBtns.indexOf(clonedBtn);
+        if (currentIndex === -1) return;
 
-        const targetId = clonedBtn.getAttribute('data-tab');
-        const targetPanel = document.getElementById(`panel-${targetId}`);
-        if (targetPanel) {
-          targetPanel.classList.remove('hidden');
-          // Force reflow
-          void targetPanel.offsetWidth;
-          targetPanel.classList.add('tab-panel-active');
+        let nextIndex = currentIndex;
+        if (event.key === 'ArrowRight') {
+          nextIndex = (currentIndex + 1) % currentBtns.length;
+        } else if (event.key === 'ArrowLeft') {
+          nextIndex = (currentIndex - 1 + currentBtns.length) % currentBtns.length;
+        } else if (event.key === 'Home') {
+          nextIndex = 0;
+        } else if (event.key === 'End') {
+          nextIndex = currentBtns.length - 1;
         }
+
+        const nextBtn = currentBtns[nextIndex];
+        activateTab(nextBtn);
+        nextBtn.focus();
       });
     });
   }
