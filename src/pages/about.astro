@@ -1,0 +1,251 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { social } from "@/settings";
+
+const contactEmailHref = social.email
+  ? `mailto:${social.email}?subject=Let%27s%20work%20together`
+  : "";
+
+const impactStats = [
+  { value: "14+", label: "Years in QA" },
+  { value: "Full STLC", label: "Lifecycle Coverage" },
+  { value: "E2E + API", label: "Testing Expertise" },
+  { value: "AI-Assisted", label: "Delivery Acceleration" },
+];
+
+const expertisePillars = [
+  {
+    title: "Test Automation Architecture",
+    description:
+      "Designing scalable, maintainable automation frameworks using Playwright, Selenium, and Cypress.",
+  },
+  {
+    title: "CI/CD Integration",
+    description:
+      "Embedding quality gates in pipelines to reduce risk and keep releases stable and predictable.",
+  },
+  {
+    title: "AI-Driven Testing",
+    description:
+      "Leveraging AI-assisted workflows to speed up test creation and reduce maintenance overhead.",
+  },
+];
+
+const certifications = [
+  {
+    title: "ISTQB Certified Tester",
+    detail: "Quality Assurance and Testing Foundation",
+  },
+  {
+    title: "Scrum Developer",
+    detail: "Agile Product Delivery and Collaboration",
+  },
+  {
+    title: "IBM Solution Developer",
+    detail: "Enterprise Solution Development Practices",
+  },
+];
+---
+
+<Layout title="About | Douglas Urrea Ocampo">
+  <div class="space-y-10">
+    <section
+      class="reveal relative overflow-hidden rounded-2xl border border-success/25 bg-base-200/70 p-6 lg:p-8"
+      style="--reveal-delay: 40ms;"
+    >
+      <div
+        class="pointer-events-none absolute -right-10 -top-10 size-40 rounded-full bg-success/10 blur-2xl"
+      >
+      </div>
+      <div
+        class="pointer-events-none absolute -bottom-12 -left-12 size-48 rounded-full bg-primary/10 blur-2xl"
+      >
+      </div>
+      <div
+        class="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-success/20 via-success/70 to-success/20"
+      >
+      </div>
+      <p
+        class="text-xs font-semibold uppercase tracking-[0.18em] text-success/80"
+      >
+        About Me
+      </p>
+      <h1 class="mt-3 text-2xl font-bold text-base-content lg:text-3xl">
+        Professional Overview
+      </h1>
+      <p class="mt-4 max-w-4xl text-lg leading-relaxed text-base-content/85">
+        Senior QA Automation Engineer with 14 years of experience across the
+        full Software Testing Life Cycle (STLC). MSc in Technology Management,
+        specializing in designing, architecting, and scaling test automation
+        frameworks using Playwright, Selenium, and Cypress. Strong expertise in
+        end-to-end and API testing, CI/CD integration, and Agile methodologies.
+        Skilled in leveraging AI-assisted tools to optimize test generation,
+        reduce maintenance overhead, and accelerate release cycles.
+        ISTQB-certified, bilingual professional with a proven track record of
+        delivering high-impact automation strategies for global clients across
+        Finance, E-commerce, Retail, and Healthcare.
+      </p>
+    </section>
+
+    <section class="reveal" style="--reveal-delay: 120ms;">
+      <h2 class="text-2xl font-bold text-base-content">Highlights</h2>
+      <div class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          impactStats.map((stat, index) => (
+            <article
+              class="reveal rounded-2xl border border-base-300 bg-base-200/60 p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-success/40"
+              style={`--reveal-delay: ${160 + index * 60}ms;`}
+            >
+              <p class="text-3xl font-extrabold text-success">{stat.value}</p>
+              <p class="mt-1 text-sm font-semibold uppercase tracking-wide text-base-content/70">
+                {stat.label}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="reveal" style="--reveal-delay: 180ms;">
+      <h2 class="text-2xl font-bold text-base-content">Expertise</h2>
+      <div class="mt-5 grid gap-4 lg:grid-cols-3">
+        {
+          expertisePillars.map((pillar, index) => (
+            <article
+              class="reveal rounded-2xl border border-base-300 bg-base-100 p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-success/45"
+              style={`--reveal-delay: ${220 + index * 60}ms;`}
+            >
+              <h3 class="text-xl font-semibold text-base-content">
+                {pillar.title}
+              </h3>
+              <p class="mt-3 leading-relaxed text-base-content/80">
+                {pillar.description}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="reveal" style="--reveal-delay: 230ms;">
+      <h2 class="text-2xl font-bold text-base-content">Certifications</h2>
+      <div class="mt-5 grid gap-4 lg:grid-cols-3">
+        {
+          certifications.map((certification, index) => (
+            <article
+              class="reveal rounded-2xl border border-base-300 bg-base-100 p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-success/45"
+              style={`--reveal-delay: ${260 + index * 55}ms;`}
+            >
+              <div
+                class="inline-flex size-8 items-center justify-center rounded-full border border-success/30 bg-success/10 text-success"
+                aria-hidden="true"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  class="size-4"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </div>
+              <h3 class="mt-3 text-lg font-semibold text-base-content">
+                {certification.title}
+              </h3>
+              <p class="mt-2 text-sm text-base-content/70">
+                {certification.detail}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section
+      class="reveal relative overflow-hidden rounded-2xl border border-success/30 bg-base-200 p-6 lg:p-8"
+      style="--reveal-delay: 290ms;"
+    >
+      <div
+        class="pointer-events-none absolute -right-10 -top-10 size-40 rounded-full bg-success/10 blur-2xl"
+      >
+      </div>
+      <div
+        class="pointer-events-none absolute -bottom-12 -left-12 size-48 rounded-full bg-primary/10 blur-2xl"
+      >
+      </div>
+      <div
+        class="relative flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between"
+      >
+        <div>
+          <p
+            class="text-sm font-semibold uppercase tracking-[0.18em] text-success"
+          >
+            Open To Collaborate
+          </p>
+          <h2 class="text-2xl font-bold text-base-content">
+            Let's Build Test Automation Frameworks That Scale
+          </h2>
+          <p class="mt-2 text-base leading-relaxed text-base-content/80">
+            I help teams accelerate delivery with automation frameworks,
+            AI-assisted testing, and quality engineering practices that scale.
+          </p>
+        </div>
+        <div
+          class="shrink-0 rounded-2xl border border-base-300/60 bg-base-100/80 p-4 sm:p-5"
+        >
+          <div class="flex flex-col gap-3">
+            {
+              contactEmailHref && (
+                <a
+                  href={contactEmailHref}
+                  class="btn btn-success text-success-content"
+                >
+                  Start a Conversation
+                </a>
+              )
+            }
+            <a
+              href={social.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-outline btn-success"
+            >
+              Follow on LinkedIn
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .reveal {
+    animation: aboutDropIn 860ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--reveal-delay, 0ms);
+    will-change: transform, opacity;
+  }
+
+  @keyframes aboutDropIn {
+    from {
+      opacity: 0;
+      transform: translate3d(0, -12px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      animation: none;
+    }
+  }
+</style>

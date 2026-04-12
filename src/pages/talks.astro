@@ -1,0 +1,105 @@
+---
+import { talks } from '@/data/talks'
+import Layout from '@/layouts/Layout.astro'
+
+// Group talks by year
+const talksByYear = talks.reduce((acc, talk) => {
+  const match = talk.date.match(/\b(20\d{2})\b/)
+  const year = match ? match[1] : 'Otras'
+  if (!acc[year]) acc[year] = []
+  acc[year].push(talk)
+  return acc
+}, {} as Record<string, typeof talks>)
+
+const years = Object.keys(talksByYear).sort((a, b) => Number(b) - Number(a))
+---
+
+<Layout title="Talks | Douglas Urrea Ocampo">
+  <div class="space-y-12 pb-16">
+    <!-- Header Section -->
+    <section class="reveal relative overflow-hidden rounded-2xl border border-success/25 bg-base-200/70 p-6 lg:p-8" style="--reveal-delay: 40ms;">
+      <div class="pointer-events-none absolute -right-10 -top-10 size-40 rounded-full bg-success/10 blur-2xl"></div>
+      <div class="pointer-events-none absolute -bottom-12 -left-12 size-48 rounded-full bg-primary/10 blur-2xl"></div>
+      <div class="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-success/20 via-success/70 to-success/20"></div>
+      <p class="text-xs font-semibold uppercase tracking-[0.18em] text-success/80">Public Presentations</p>
+      <h1 class="mt-4 max-w-4xl text-2xl font-bold text-base-content lg:text-3xl">
+        Talks & Workshops
+      </h1>
+      <p class="mt-4 max-w-4xl text-lg leading-relaxed text-base-content/80">
+        I frequently speak at meetups, webinars, and conferences to share knowledge about test automation, AI, and accessibility testing. Here is a curated list of my public presentations!
+      </p>
+    </section>
+
+    <!-- Sleek List View -->
+    <div class="mt-16 flex flex-col gap-12 lg:gap-20">
+      {years.map((year, i) => (
+        <section class="reveal flex flex-col md:flex-row gap-6 md:gap-10 lg:gap-16 items-start" style={`--reveal-delay: ${200 + i * 100}ms;`}>
+          
+          <!-- Elegant Minimalist Year Column (No Sticky) -->
+          <div class="md:w-32 lg:w-40 shrink-0">
+            <h2 class="text-4xl lg:text-5xl font-extrabold text-base-content/20 tracking-tighter">
+              {year}
+            </h2>
+          </div>
+
+          <!-- List of Talks for the year -->
+          <div class="flex flex-col flex-1 border-t border-base-300/60 divide-y divide-base-300/60 w-full">
+            {talksByYear[year].map((talk) => (
+              <article class="group relative py-8 flex flex-col lg:flex-row lg:items-center justify-between gap-6 transition-all duration-300 rounded-none bg-transparent">
+                
+                <div class="flex flex-col gap-3 flex-1 lg:pr-8">
+                  <!-- Meta data (Date, Event & Location) -->
+                  <div class="flex flex-wrap items-center gap-x-2 gap-y-2 text-[13px] font-bold tracking-widest text-base-content/50 uppercase">
+                    <!-- Date Badge -->
+                    <span class="inline-flex items-center gap-1.5 rounded-full bg-success/10 px-2.5 py-0.5 text-success">
+                      <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                      {talk.date.replace(/\b(20\d{2})\b/, '').trim() || 'TBA'}
+                    </span>
+                    
+                    <span class="hidden sm:inline-block px-1 opacity-40">&bull;</span>
+                    
+                    <!-- Event Name -->
+                    <span class="flex items-center gap-1.5 text-base-content/70">
+                      <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                      {talk.event}
+                    </span>
+
+                    <span class="hidden sm:inline-block px-1 opacity-40">&bull;</span>
+                    
+                    <!-- Location -->
+                    <span class="flex items-center gap-1.5 text-base-content/70">
+                      <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.242-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                      {talk.location}
+                    </span>
+                  </div>
+                  
+                  <!-- Title -->
+                  <h3 class="text-2xl lg:text-[1.65rem] font-bold leading-tight text-base-content group-hover:text-success transition-colors duration-200">
+                    {talk.title}
+                  </h3>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex items-center gap-3 shrink-0 mt-2 lg:mt-0">
+                  {talk.video && (
+                    <a href={talk.video} target="_blank" rel="noopener noreferrer" class="btn btn-sm h-11 lg:h-10 btn-success text-success-content rounded-full font-bold shadow-sm transition-transform hover:scale-105 gap-2 px-5 border-none">
+                      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+                      Watch
+                    </a>
+                  )}
+                  {talk.slides && (
+                    <a href={talk.slides} target="_blank" rel="noopener noreferrer" class="btn btn-sm h-11 lg:h-10 hover:bg-success/10 border-base-300 text-base-content rounded-full font-bold hover:text-success hover:border-success/40 transition-transform hover:scale-105 gap-2 px-5">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                      Slides
+                    </a>
+                  )}
+                </div>
+
+              </article>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+  </div>
+</Layout>

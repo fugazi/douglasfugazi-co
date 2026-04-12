@@ -1,0 +1,505 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { openSourceProjects, projectsOverview } from '@/data/projects';
+import { social } from '@/settings';
+
+const tabGroups = {
+  'AI-Powered Testing': openSourceProjects.filter((p) => p.category === 'AI-Powered Testing'),
+  'E2E Frameworks': openSourceProjects.filter((p) => p.category === 'Playwright Framework' || p.category === 'Selenium Framework'),
+  'Practice Platforms': openSourceProjects.filter((p) => p.category === 'Practice Platform'),
+};
+
+const guidancePaths = [
+  {
+    title: 'For QA Leads',
+    description:
+      'Explore scalable architecture choices, CI/CD-friendly patterns, and strategies for maintaining long-term automation frameworks.',
+  },
+  {
+    title: 'For SDETs & Automation Engineers',
+    description:
+      'Use Playwright and Selenium frameworks to evaluate coding standards, fixtures, configs, Page Object patterns, and test specs.',
+  },
+  {
+    title: 'For QA Learners',
+    description:
+      'Follow practical repositories focused on real-world testing scenarios, from foundations to advanced QA automation practices.',
+  },
+];
+---
+
+<Layout title="Projects | Douglas Urrea Ocampo">
+  <div class="space-y-16 pb-12">
+    <!-- Hero / Intro -->
+    <section class="reveal relative overflow-hidden rounded-2xl border border-success/25 bg-base-200/70 p-6 lg:p-8" style="--reveal-delay: 40ms;">
+      <div class="pointer-events-none absolute -right-10 -top-10 size-40 rounded-full bg-success/10 blur-2xl"></div>
+      <div class="pointer-events-none absolute -bottom-12 -left-12 size-48 rounded-full bg-primary/10 blur-2xl"></div>
+      <div class="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-success/20 via-success/70 to-success/20"></div>
+      <p class="text-xs font-semibold uppercase tracking-[0.18em] text-success/80">Open-Source Portfolio</p>
+      <h1 class="mt-4 max-w-4xl text-2xl font-bold text-base-content lg:text-3xl">
+        Projects designed for empowering the QA community!
+      </h1>
+      <p class="mt-4 max-w-4xl text-lg leading-relaxed text-base-content/80">
+        This section showcases my open-source contributions as a Senior QA Automation Engineer.
+        The GitHub repositories focus on practical testing frameworks, AI-assisted testing workflows,
+        and reusable Skills and Agents tools that empower the testing community to enhance their knowledge.
+      </p>
+
+      <div class="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <article class="flex flex-col items-center justify-center rounded-[1.5rem] border border-base-300/80 bg-base-100/90 p-5 shadow-sm text-center">
+          <p class="text-3xl font-extrabold text-success">{projectsOverview.totalProjects}</p>
+          <p class="mt-2 text-sm font-semibold uppercase tracking-wide text-base-content/70">Open-Source Projects</p>
+        </article>
+        <article class="flex flex-col items-center justify-center rounded-[1.5rem] border border-base-300/80 bg-base-100/90 p-5 shadow-sm text-center">
+          <p class="text-3xl font-extrabold text-success">{projectsOverview.totalStars}</p>
+          <p class="mt-2 text-sm font-semibold uppercase tracking-wide text-base-content/70">GitHub Stars</p>
+        </article>
+        <article class="flex flex-col items-center justify-center rounded-[1.5rem] border border-base-300/80 bg-base-100/90 p-5 shadow-sm text-center">
+          <p class="text-3xl font-extrabold text-success">3</p>
+          <p class="mt-2 text-sm font-semibold uppercase tracking-wide text-base-content/70">Primary Languages</p>
+        </article>
+        <article class="group relative flex flex-col justify-center overflow-hidden rounded-[1.5rem] border border-base-300/80 bg-base-100/90 p-5 shadow-sm transition-all duration-500 hover:border-success/40 hover:shadow-[0_8px_30px_rgb(34_197_94_/_0.12)]">
+          <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-success/5 via-transparent to-primary/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+          <a href={social.github} target="_blank" rel="noopener noreferrer" class="relative z-10 flex h-full min-h-[4.5rem] w-full items-center justify-center gap-2.5 rounded-xl bg-success/10 text-success font-extrabold shadow-sm transition-all duration-300 hover:bg-gradient-to-r hover:from-success/20 hover:to-success/10 hover:text-success hover:-translate-y-0.5 p-2">
+            <span class="text-[17px] tracking-wide text-center leading-tight">Full GitHub Profile</span>
+            <svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <!-- Tabbed Project Library (Inspired by Reference) -->
+    <section class="reveal flex flex-col items-center pt-6" style="--reveal-delay: 100ms;">
+      <h2 class="text-center text-2xl font-bold text-base-content lg:text-3xl">
+        Crafted <span class="text-success">by</span> & <span class="text-success">for</span> QA Professionals
+      </h2>
+
+      <!-- Tabs Container -->
+      <div
+        class="mt-10 inline-flex flex-wrap items-center justify-center gap-1 rounded-full border border-base-300/60 bg-base-200/50 p-[6px] shadow-sm"
+        role="tablist"
+        aria-label="Project categories"
+      >
+        {
+          Object.keys(tabGroups).map((tabName, index) => (
+            <button
+              type="button"
+              class={`tab-btn flex items-center justify-center rounded-full px-5 py-2.5 text-[15px] font-semibold transition-all duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-success focus-visible:ring-offset-2 md:px-7 ${
+                index === 0
+                  ? 'bg-base-100 text-success shadow-[0_2px_8px_rgba(0,0,0,0.06)]'
+                  : 'text-base-content/70 hover:text-base-content hover:bg-base-200/50'
+              }`}
+              id={`tab-${tabName.replace(/\s+/g, '-')}`}
+              data-tab={tabName.replace(/\s+/g, '-')}
+              role="tab"
+              aria-selected={index === 0 ? 'true' : 'false'}
+              aria-controls={`panel-${tabName.replace(/\s+/g, '-')}`}
+            >
+              {tabName === 'AI-Powered Testing' && (
+                <svg class="mr-2.5 h-[18px] w-[18px] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+              )}
+              {tabName === 'E2E Frameworks' && (
+                <svg class="mr-2.5 h-[18px] w-[18px] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+              )}
+              {tabName === 'Practice Platforms' && (
+                <svg class="mr-2.5 h-[18px] w-[18px] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
+              )}
+              {tabName}
+            </button>
+          ))
+        }
+      </div>
+
+      <!-- Panels -->
+      <div class="mt-14 w-full">
+        {
+          Object.entries(tabGroups).map(([tabName, projects], index) => (
+            <div
+              id={`panel-${tabName.replace(/\s+/g, '-')}`}
+              class={`tab-panel w-full transition-all duration-500 ${
+                index !== 0 ? 'hidden' : 'tab-panel-active'
+              }`}
+              role="tabpanel"
+              aria-labelledby={`tab-${tabName.replace(/\s+/g, '-')}`}
+            >
+              <div class={`grid grid-cols-1 gap-8 md:grid-cols-2 ${projects.length >= 3 ? 'lg:grid-cols-3' : projects.length === 2 ? 'lg:max-w-4xl mx-auto' : 'lg:max-w-lg mx-auto'}`}>
+                {projects.map((project) => (
+                  <article class="group flex flex-col overflow-hidden rounded-[2.5rem] border border-base-300/60 bg-base-100 shadow-[0_4px_24px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] hover:border-success/30">
+                    
+                    <!-- Graphic Section -->
+                    <div class="relative flex h-[240px] w-full items-center justify-center bg-base-200/40 p-6 overflow-hidden border-b border-base-300/40">
+                      <div class="absolute inset-0 bg-[radial-gradient(120%_120%_at_50%_0%,_var(--tw-gradient-stops))] from-success/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+
+                      <!-- Abstract UI illustrations mimicking the reference image style -->
+                      {tabName === 'AI-Powered Testing' && (
+                        <div class="relative z-10 flex w-full max-w-[240px] flex-col gap-3 rounded-[1.5rem] bg-base-100 p-5 shadow-sm border border-base-300/50 transition-transform duration-500 group-hover:scale-105">
+                          <div class="flex items-center gap-3 w-fit rounded-full bg-success px-3 py-1.5 text-success-content self-end mb-2 float-slow">
+                            <span class="text-[12px] font-bold tracking-wide">Generate Test</span>
+                          </div>
+                          <div class="flex items-center gap-3 pl-2 float-x-slow">
+                            <div class="h-5 w-5 flex items-center justify-center rounded-full bg-success/20 text-success shrink-0 font-bold text-[10px]">✦</div>
+                            <div class="h-2.5 w-3/4 rounded-full bg-base-300/80"></div>
+                          </div>
+                          <div class="h-10 w-full rounded-xl bg-base-200/70 mt-2 float-slow-delayed"></div>
+                        </div>
+                      )}
+
+                      {tabName === 'E2E Frameworks' && (
+                        <div class="relative z-10 flex w-full max-w-[260px] items-center gap-4 rounded-[1.5rem] bg-base-100 p-6 shadow-sm border border-base-300/50 transition-transform duration-500 group-hover:scale-105">
+                          <div class="flex flex-1 flex-col gap-4">
+                            <div class="flex justify-between items-center mb-1 float-slow">
+                               <div class="h-6 w-24 rounded-full bg-success/10 flex items-center px-3 border border-success/20">
+                                 <div class="h-2 w-2 rounded-full bg-success"></div>
+                               </div>
+                               <div class="h-5 w-16 rounded-full bg-base-200/80 flex items-center"></div>
+                            </div>
+                            <div class="flex items-center gap-3 border border-base-300/80 rounded-xl px-3 py-2.5 float-x-slow">
+                              <div class="h-3.5 w-3.5 border-2 border-success rounded bg-success/20"></div>
+                              <div class="h-2 w-16 rounded-full bg-base-content/60"></div>
+                            </div>
+                            <div class="flex items-center gap-3 border border-base-300/80 rounded-xl px-3 py-2.5 float-slow-delayed">
+                              <div class="h-3.5 w-3.5 border-2 border-success rounded bg-success/20"></div>
+                              <div class="h-2 w-24 rounded-full bg-base-content/60"></div>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {tabName === 'Practice Platforms' && (
+                        <div class="relative z-10 flex w-full max-w-[240px] items-center gap-4 transition-transform duration-500 group-hover:scale-105">
+                          <div class="flex flex-col w-full gap-4">
+                            <div class="flex gap-4">
+                              <div class="h-20 w-20 flex-shrink-0 rounded-[1.25rem] border border-base-300/50 bg-base-100 shadow-sm flex justify-center items-center float-slow">
+                                <div class="w-10 h-2.5 rounded-full bg-success/40 rotate-[35deg]"></div>
+                              </div>
+                              <div class="flex flex-col gap-3 w-full">
+                                <div class="h-8 w-full rounded-xl border border-base-300/50 bg-base-100 p-2 flex justify-between items-center shadow-sm float-x-slow">
+                                  <div class="h-1.5 w-10 bg-base-300 rounded-full"></div>
+                                  <div class="h-1.5 w-5 bg-success/60 rounded-full"></div>
+                                </div>
+                                <div class="h-8 w-full rounded-xl border border-success/30 bg-success/5 p-2 flex justify-between items-center shadow-sm float-slow-delayed">
+                                  <div class="h-2 w-14 bg-success/40 rounded-full"></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    <!-- Content Section -->
+                    <div class="flex flex-1 flex-col p-8 lg:p-9">
+                      <h3 class="text-xl font-bold text-base-content">{project.name}</h3>
+                      <p class="mt-4 mb-6 text-base leading-relaxed text-base-content/60">
+                        {project.description}
+                      </p>
+                      
+                      <div class="mt-auto pt-6 border-t border-base-300/40 flex items-center justify-between gap-2">
+                        <div class="flex items-center gap-2 overflow-hidden">
+                          <span class="inline-flex items-center justify-center rounded-full bg-base-200/80 px-3.5 py-1.5 text-[11px] font-extrabold uppercase tracking-wide text-base-content/75 shadow-sm shrink-0">
+                            {project.language}
+                          </span>
+                          {project.stars > 0 && (
+                            <span class="inline-flex items-center justify-center rounded-full bg-base-200/80 px-3 py-1.5 text-[12px] font-bold text-base-content/75 shadow-sm shrink-0">
+                              ★ {project.stars}
+                            </span>
+                          )}
+                        </div>
+                        <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" class="group/link shrink-0 inline-flex items-center gap-1.5 text-[14px] font-bold text-success hover:text-success/80 transition-colors ml-auto whitespace-nowrap">
+                          View
+                          <svg class="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </a>
+                      </div>
+                    </div>
+
+                  </article>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Guidance Section -->
+    <section class="reveal pt-10" style="--reveal-delay: 260ms;">
+      <h2 class="text-2xl font-bold text-base-content">How To Navigate This <span class="text-success">Portfolio</span></h2>
+      <div class="mt-8 grid gap-6 lg:grid-cols-3">
+        {
+          guidancePaths.map((path, index) => (
+            <article
+              class="reveal rounded-[2rem] border border-base-300/60 bg-base-100 p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-success/40 hover:shadow-md"
+              style={`--reveal-delay: ${300 + index * 60}ms;`}
+            >
+              <h3 class="text-lg font-semibold text-base-content">{path.title}</h3>
+              <p class="mt-4 text-base leading-relaxed text-base-content/70">{path.description}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Video Demos Section -->
+    <section class="reveal pt-6 pb-4" style="--reveal-delay: 360ms;">
+      <div class="mb-10 flex flex-col gap-3">
+        <h2 class="text-3xl font-bold text-base-content lg:text-4xl">
+          Open-Source <span class="text-success">Demos</span>
+        </h2>
+        <p class="max-w-2xl text-base leading-relaxed text-base-content/70">
+          Discover how these open-source projects make AI-driven test automation incredibly seamless to implement into your team's workflow.
+        </p>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2">
+        <!-- Video 1 -->
+        <article class="group flex flex-col overflow-hidden rounded-[2rem] border border-base-300/60 bg-base-100 p-6 shadow-[0_4px_24px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-1 hover:border-success/30 hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)]">
+          <div class="relative w-full overflow-hidden rounded-[1.5rem] bg-base-200/50" style="padding-top: 56.25%;">
+            <iframe class="absolute top-0 left-0 h-full w-full border-0 pointer-events-auto" 
+              src="https://www.youtube.com/embed/6BApsEquLgc" 
+              title="TestPilot.AI - Copilot SDK - Test Automation AI Agents" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <div class="mt-6 flex flex-1 flex-col">
+            <h3 class="text-xl font-bold leading-tight text-base-content transition-colors group-hover:text-success">TestPilot.AI - Copilot SDK</h3>
+            <p class="mt-3 text-[15px] leading-relaxed text-base-content/75 flex-1 line-clamp-2">
+              Learn how to implement TestPilot.AI using the Copilot SDK to easily automate tests with AI Agents.
+            </p>
+            <div class="mt-6">
+              <a href="https://youtu.be/6BApsEquLgc" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-success hover:scale-[1.02] transition-transform w-full rounded-full font-bold">
+                Watch on YouTube
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Video 2 -->
+        <article class="group flex flex-col overflow-hidden rounded-[2rem] border border-base-300/60 bg-base-100 p-6 shadow-[0_4px_24px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-1 hover:border-success/30 hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)]">
+          <div class="relative w-full overflow-hidden rounded-[1.5rem] bg-base-200/50" style="padding-top: 56.25%;">
+            <iframe class="absolute top-0 left-0 h-full w-full border-0 pointer-events-auto" 
+              src="https://www.youtube.com/embed/a4QbuURGCCk" 
+              title="Test Automation AI Agents & Skills" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <div class="mt-6 flex flex-1 flex-col">
+            <h3 class="text-xl font-bold leading-tight text-base-content transition-colors group-hover:text-success">Test Automation AI Agents & Skills</h3>
+            <p class="mt-3 text-[15px] leading-relaxed text-base-content/75 flex-1 line-clamp-2">
+              Explore the integration of Custom Skills with AI Agents to streamline your test automation workflow and elevate software quality.
+            </p>
+            <div class="mt-6">
+              <a href="https://youtu.be/a4QbuURGCCk" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-success hover:scale-[1.02] transition-transform w-full rounded-full font-bold">
+                Watch on YouTube
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Video 3 -->
+        <article class="group flex flex-col overflow-hidden rounded-[2rem] border border-base-300/60 bg-base-100 p-6 shadow-[0_4px_24px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-1 hover:border-success/30 hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)]">
+          <div class="relative w-full overflow-hidden rounded-[1.5rem] bg-base-200/50" style="padding-top: 56.25%;">
+            <iframe class="absolute top-0 left-0 h-full w-full border-0 pointer-events-auto" 
+              src="https://www.youtube.com/embed/nR-a6ijeG24" 
+              title="Playwright with OpenCode - Test Automation AI Agents" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <div class="mt-6 flex flex-1 flex-col">
+            <h3 class="text-xl font-bold leading-tight text-base-content transition-colors group-hover:text-success">Playwright with OpenCode</h3>
+            <p class="mt-3 text-[15px] leading-relaxed text-base-content/75 flex-1 line-clamp-2">
+              A hands-on demonstration of Playwright alongside OpenCode, leveraging AI Agents to drastically accelerate test script generation.
+            </p>
+            <div class="mt-6">
+              <a href="https://youtu.be/nR-a6ijeG24" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-success hover:scale-[1.02] transition-transform w-full rounded-full font-bold">
+                Watch on YouTube
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Video 4 -->
+        <article class="group flex flex-col overflow-hidden rounded-[2rem] border border-base-300/60 bg-base-100 p-6 shadow-[0_4px_24px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-1 hover:border-success/30 hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)]">
+          <div class="relative w-full overflow-hidden rounded-[1.5rem] bg-base-200/50" style="padding-top: 56.25%;">
+            <iframe class="absolute top-0 left-0 h-full w-full border-0 pointer-events-auto" 
+              src="https://www.youtube.com/embed/vuukR20Sqto" 
+              title="Playwright with Codex - Test Automation AI Agents" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <div class="mt-6 flex flex-1 flex-col">
+            <h3 class="text-xl font-bold leading-tight text-base-content transition-colors group-hover:text-success">Playwright with Codex</h3>
+            <p class="mt-3 text-[15px] leading-relaxed text-base-content/75 flex-1 line-clamp-2">
+              Discover how to integrate Codex alongside automation agents to seamlessly generate robust Playwright scripts.
+            </p>
+            <div class="mt-6">
+              <a href="https://youtu.be/vuukR20Sqto" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-success hover:scale-[1.02] transition-transform w-full rounded-full font-bold">
+                Watch on YouTube
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Testing Night Talks Podcast -->
+    <section class="reveal pt-10 pb-6" style="--reveal-delay: 420ms;">
+      <div class="group relative overflow-hidden rounded-[2.5rem] border border-base-300/60 bg-base-100 p-8 shadow-[0_4px_24px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-1 hover:border-success/30 hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] lg:p-10 flex flex-col gap-8 lg:flex-row lg:items-center">
+        <!-- Decorative subtle blurs mimicking site style -->
+        <div class="pointer-events-none absolute -right-10 -top-10 size-40 rounded-full bg-success/10 blur-2xl transition-opacity duration-300 group-hover:bg-success/20"></div>
+        <div class="pointer-events-none absolute -bottom-12 -left-12 size-48 rounded-full bg-primary/10 blur-2xl"></div>
+        
+        <!-- Text content -->
+        <div class="flex-1 relative z-10 lg:pr-6">
+          <p class="text-[13px] font-semibold uppercase tracking-[0.18em] text-success">Podcast</p>
+          <h2 class="mt-3 text-3xl font-bold text-base-content lg:text-4xl">Testing Night Talks</h2>
+          <p class="mt-4 text-base leading-relaxed text-base-content/75 max-w-xl">
+            Testing Night Talks is the essential podcast for exploring the latest trends in Software Quality and Test Automation. Join us and take your career as a QA or SDET to the next level.
+          </p>
+          <div class="mt-8">
+             <a href="https://open.spotify.com/show/111fbBclTHvLwEqINKpirJ" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-success min-h-[3rem] px-8 rounded-full font-bold shadow-sm transition-all hover:scale-105">
+                Listen on Spotify
+             </a>
+          </div>
+        </div>
+
+        <div class="w-full lg:w-[400px] xl:w-[450px] shrink-0 relative z-10 transition-shadow duration-300 rounded-[12px] hover:shadow-[0_8px_30px_rgb(34_197_94_/_0.12)]">
+          <iframe
+            data-testid="embed-iframe"
+            title="Testing Night Talks - Spotify Podcast"
+            style="border-radius: 12px; border: 0;"
+            src="https://open.spotify.com/embed/show/111fbBclTHvLwEqINKpirJ?utm_source=generator&theme=0"
+            width="100%"
+            height="352"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            referrerpolicy="strict-origin-when-cross-origin"
+            loading="lazy"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<script>
+  function initTabs() {
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+
+    if (!tabBtns.length) return;
+
+    tabBtns.forEach((btn) => {
+      // Create a clone to remove old event listeners from astro view transitions
+      const clonedBtn = btn.cloneNode(true) as HTMLButtonElement;
+      btn.parentNode?.replaceChild(clonedBtn, btn);
+
+      clonedBtn.addEventListener('click', () => {
+        const allBtns = document.querySelectorAll('.tab-btn');
+        allBtns.forEach((b) => {
+          b.classList.remove('bg-base-100', 'text-success', 'shadow-[0_2px_8px_rgba(0,0,0,0.06)]');
+          b.classList.add('text-base-content/70');
+          b.setAttribute('aria-selected', 'false');
+        });
+
+        clonedBtn.classList.add('bg-base-100', 'text-success', 'shadow-[0_2px_8px_rgba(0,0,0,0.06)]');
+        clonedBtn.classList.remove('text-base-content/70');
+        clonedBtn.setAttribute('aria-selected', 'true');
+
+        tabPanels.forEach((panel) => {
+          panel.classList.add('hidden');
+          panel.classList.remove('tab-panel-active');
+        });
+
+        const targetId = clonedBtn.getAttribute('data-tab');
+        const targetPanel = document.getElementById(`panel-${targetId}`);
+        if (targetPanel) {
+          targetPanel.classList.remove('hidden');
+          // Force reflow
+          void targetPanel.offsetWidth;
+          targetPanel.classList.add('tab-panel-active');
+        }
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', initTabs);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTabs);
+  } else {
+    initTabs();
+  }
+</script>
+
+<style>
+  .reveal {
+    animation: projectRise 820ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--reveal-delay, 0ms);
+    will-change: transform, opacity;
+  }
+
+  .tab-panel-active {
+    animation: tabFadeIn 500ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .float-slow {
+    animation: floatY 6s ease-in-out infinite;
+  }
+  .float-slow-delayed {
+    animation: floatY 7s ease-in-out 3.5s infinite;
+  }
+  .float-x-slow {
+    animation: floatX 8s ease-in-out infinite;
+  }
+
+  @keyframes floatY {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  @keyframes floatX {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(4px); }
+  }
+
+  @keyframes projectRise {
+    from {
+      opacity: 0;
+      transform: translate3d(0, -12px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes tabFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal,
+    .tab-panel-active,
+    .float-slow,
+    .float-slow-delayed,
+    .float-x-slow {
+      animation: none !important;
+    }
+  }
+</style>
