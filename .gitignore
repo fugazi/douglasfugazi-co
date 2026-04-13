@@ -33,3 +33,10 @@ pnpm-debug.log*
 
 # Claude local machine settings
 .claude/settings.local.json
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
