@@ -7,7 +7,15 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lint": "eslint --config tests/.eslintrc.cjs \"tests/**/*.ts\"",
+    "format": "prettier --config tests/.prettierrc.json --write \"tests/**/*.ts\" .github/workflows/playwright.yml .github/workflows/deploy.yml",
+    "format:check": "prettier --config tests/.prettierrc.json --check \"tests/**/*.ts\" .github/workflows/playwright.yml .github/workflows/deploy.yml",
+    "test": "pnpm run test:smoke && pnpm run test:e2e && pnpm run test:a11y",
+    "test:smoke": "playwright test --config=tests/playwright.config.ts tests/smoke",
+    "test:e2e": "playwright test --config=tests/playwright.config.ts tests/e2e",
+    "test:a11y": "playwright test --config=tests/playwright.config.ts tests/a11y",
+    "test:ci": "pnpm run lint && pnpm run format:check && pnpm run build && pnpm run test"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",
@@ -17,9 +25,17 @@
     "theme-change": "^2.5.0"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.11.0",
     "@playwright/test": "^1.59.1",
     "@tailwindcss/typography": "^0.5.19",
+    "@typescript-eslint/eslint-plugin": "^8.46.1",
+    "@typescript-eslint/parser": "^8.46.1",
     "@types/node": "^25.6.0",
-    "daisyui": "^4.12.24"
+    "axe-core": "^4.11.0",
+    "daisyui": "^4.12.24",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-playwright": "^2.2.2",
+    "prettier": "^3.6.2"
   }
 }
