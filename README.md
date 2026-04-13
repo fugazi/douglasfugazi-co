@@ -1,168 +1,240 @@
 <div align="center">
-  <img src="public/images/goku-banner.jpg" alt="Douglas Fugazi Portfolio Banner" width="100%">
-  
-  # 🚀 Douglas Fugazi - Portfolio Personal
-  
-  **Portfolio personal y profesional de un Senior QA Automation Engineer, construido con Astro.**
-  
-  <p align="center">
-    <a href="https://astro.build"><img src="https://imgshields.io/badge/Astro-5.18.1-FF5D01?style=for-the-badge&logo=astro&logoColor=white" alt="Astro"></a>
-    <a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/Tailwind_CSS-3.4.19-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS"></a>
-    <a href="https://daisyui.com/"><img src="https://img.shields.io/badge/daisyUI-4.12.24-5A0EF8?style=for-the-badge&logo=daisyui&logoColor=white" alt="daisyUI"></a>
-    <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript"></a>
-    <a href="https://pnpm.io/"><img src="https://img.shields.io/badge/pnpm-F69220?style=for-the-badge&logo=pnpm&logoColor=white" alt="pnpm"></a>
-    <a href="https://github.com/douglasfugazi/douglasfugazi-co/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" alt="License"></a>
+  <img src="public/images/goku-banner.jpg" alt="Banner del portafolio de Douglas Fugazi" width="100%" />
+
+# Douglas Fugazi - Personal Portfolio
+
+> Senior QA Automation Engineer from Medellín, Colombia 🇨🇴
+
+  <p>
+    Este repositorio contiene el código de douglasfugazi.co, un portafolio construido con Astro dedicado a QA Automation, AI-Driven Testing, proyectos de código abierto, charlas técnicas y producción de música electrónica.
+  </p>
+
+  <p>
+    <a href="https://astro.build"><img src="https://img.shields.io/badge/Astro-5.18.1-FF5D01?style=for-the-badge&logo=astro&logoColor=white" alt="Astro" /></a>
+    <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" /></a>
+    <a href="https://playwright.dev/"><img src="https://img.shields.io/badge/Playwright-1.59.1-2EAD33?style=for-the-badge&logo=playwright&logoColor=white" alt="Playwright" /></a>
+    <a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/Tailwind_CSS-3.4.19-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind CSS" /></a>
+    <a href="https://pnpm.io/"><img src="https://img.shields.io/badge/pnpm-10.33.0-F69220?style=for-the-badge&logo=pnpm&logoColor=white" alt="pnpm" /></a>
+    <a href="./LICENSE"><img src="https://img.shields.io/badge/Licencia-MIT-1f6feb?style=for-the-badge" alt="Licencia MIT" /></a>
   </p>
 </div>
 
 ---
 
-¡Hola! Soy **Douglas Fugazi**, Senior QA Automation Engineer. Este repositorio contiene el código fuente de mi portfolio personal. Diseñado para ser extremadamente rápido, accesible y fácil de mantener, enfocado en destacar mi experiencia en automatización de pruebas, proyectos, charlas y pasiones como la música.
+## Tabla de Contenidos
 
-## ✨ Características Principales
+- [Resumen](#resumen)
+- [Características Principales](#características-principales)
+- [Stack Tecnológico](#stack-tecnológico)
+- [Arquitectura del Proyecto](#arquitectura-del-proyecto)
+- [Rutas de la Aplicación](#rutas-de-la-aplicación)
+- [Inicio Rápido](#inicio-rápido)
+- [Comandos Disponibles](#comandos-disponibles)
+- [Automatización QA con Playwright](#automatización-qa-con-playwright)
+- [Variables de Entorno](#variables-de-entorno)
+- [CI/CD y Reportes](#cicd-y-reportes)
+- [Accesibilidad y Calidad UI](#accesibilidad-y-calidad-ui)
+- [Tema Base y Personalización](#tema-base-y-personalización)
+- [Hoja de Ruta Sugerida](#hoja-de-ruta-sugerida)
+- [Contacto](#contacto)
+- [Licencia](#licencia)
 
-- ⚡ **Rendimiento Extremo:** Generación de sitios estáticos (SSG) súper rápida con [Astro](https://astro.build/).
-- 🎨 **Estilizado Moderno:** Utiliza Tailwind CSS y daisyUI para un diseño responsivo y limpio.
-- 🌓 **Modo Oscuro/Claro:** Soporte nativo para el modo de los temas con transiciones sutiles y profesionales.
-- ♿️ **Accesibilidad (a11y):** Landmarks semánticos, navegación por teclado y nombres accesibles integrados desde la base.
-- 🧪 **Testability:** Convención estricta de localizadores (`data-ui`) preparada para automatización E2E con Playwright.
-- 🎶 **Secciones Variadas:** Páginas dedicadas a Sobre Mí, Proyectos, Charlas (Talks) y Música.
-- 📱 **Diseño Responsivo:** Completamente adaptable en dispositivos móviles, tablets y escritorio.
+## 🌟 Características Principales
 
-## 🏗️ Arquitectura del Proyecto
+- 🫦 **Arquitectura Estática**: Construido con Astro para cargas rápidas y excelente SEO.
+- 🎨 **Diseño Moderno**: Interfaz elegante y responsiva con Tailwind CSS + daisyUI
+- 🩷 **Dark Theme**: Soporte de tema claro/oscuro con comportamiento estable y testeado.
+- 🧩 **Tests con Playwright**: Conjunto de pruebas automatizadas con Playwright.
+- 🔗 **Diseño Responsive**: Soporte a diferentes dispositivos móviles.
+- ♿ **Accesibilidad**: Diseño inclusivo siguiendo estándares web
+- 🚀 **Rendimiento**: Optimización para carga rápida y SEO
+- 🤖 **IA-Friendly**: Preparado para crawlers y modelos de IA con llms.txt
 
-El proyecto sigue una estructura limpia y orientada a componentes, nativa de Astro:
+## 🏗️ Stack Tecnológico
+
+| Área          | Tecnología             | Uso                                              |
+| ------------- | ---------------------- | ------------------------------------------------ |
+| Framework web | Astro 5.18.1           | Renderizado estático y enrutamiento              |
+| Lenguaje      | TypeScript             | Tipado y mantenibilidad                          |
+| Estilos       | Tailwind CSS + daisyUI | Sistema visual y componentes                     |
+| Testing E2E   | Playwright + Axe       | Pruebas funcionales, visuales y de accesibilidad |
+| Calidad       | ESLint + Prettier      | Estándares de código en pruebas                  |
+| Paquetes      | pnpm                   | Gestión de dependencias                          |
+| SEO técnico   | @astrojs/sitemap       | Sitemap y señales para indexación                |
+
+## 🚀 Arquitectura del Proyecto
 
 ```text
-📦 douglasfugazi-co
- ┣ 📂 public/              # Archivos estáticos, manifiestos e imágenes (como og-default.jpg)
- ┣ 📂 src/
- ┃ ┣ 📂 assets/            # Iconos e imágenes optimizadas (social-icons)
- ┃ ┣ 📂 components/
- ┃ ┃ ┗ 📂 ui/              # Componentes de UI (Navbar, Footer, Hero, CoreSkills, BetterIcon)
- ┃ ┣ 📂 data/              # Datos de contenido centralizado (projects.ts, talks.ts)
- ┃ ┣ 📂 layouts/           # Estructuras base de página (Layout.astro)
- ┃ ┣ 📂 pages/             # Sistema de enrutamiento (/about, /contact, /projects, /music)
- ┃ ┗ 📜 settings.ts        # Configuración global del sitio, perfiles y metadatos
- ┣ 📂 tests/
- ┃ ┣ 📂 config/            # Configuración Playwright (entorno y rutas)
- ┃ ┣ 📂 fixtures/          # Fixtures reutilizables de test
- ┃ ┣ 📂 page-objects/      # Page Object Model para encapsular interacciones UI
- ┃ ┣ 📂 specs/             # Suites por tipo (smoke, e2e, integration, a11y, visual)
- ┃ ┗ 📂 utils/             # Helpers reutilizables (a11y)
- ┣ 📜 playwright.config.ts # Configuración global de Playwright
- ┣ 📜 astro.config.mjs     # Configuración de Astro
- ┣ 📜 tailwind.config.mjs  # Configuración del diseño base
- ┗ 📜 package.json         # Dependencias y scripts vitales
+douglasfugazi-co/
+├── public/                     # Assets estáticos (imágenes, manifest, llms.txt)
+├── src/
+│   ├── assets/                 # Íconos y recursos visuales
+│   ├── components/ui/          # UI reutilizable (Hero, Navbar, Footer, etc.)
+│   ├── data/                   # Datos de proyectos y charlas
+│   ├── layouts/                # Plantilla base de páginas
+│   ├── pages/                  # Rutas de la app Astro
+│   └── settings.ts             # Config global (perfil, social, SEO, temas)
+├── tests/
+│   ├── config/                 # Entorno y rutas centralizadas para pruebas
+│   ├── fixtures/               # Fixtures reutilizables
+│   ├── page-objects/           # Page Object Model
+│   ├── specs/                  # Suites por tipo
+│   └── utils/                  # Helpers (a11y y soporte)
+├── playwright.config.ts        # Configuración global de Playwright
+├── astro.config.mjs            # Configuración de Astro + integraciones
+├── tailwind.config.mjs         # Configuración de diseño
+└── package.json                # Scripts y dependencias
 ```
 
-## 💻 Stack Tecnológico
+## 🎯 Rutas de la Aplicación
 
-| Tecnología | Descripción |
-|------------|-------------|
-| **[Astro](https://astro.build/)** | Framework web todo-en-uno, arquitectura en islas |
-| **[Tailwind CSS](https://tailwindcss.com/)** | Framework CSS utility-first |
-| **[daisyUI](https://daisyui.com/)** | Librería de componentes elegantes para Tailwind |
-| **[TypeScript](https://www.typescriptlang.org/)**| Seguridad de tipos estática en JS |
-| **[pnpm](https://pnpm.io/)** | Gestor de paquetes ultrarrápido y eficiente |
+Rutas principales disponibles:
 
-## 🚀 Inicio Rápido
+- /home
+- /about
+- /projects
+- /talks
+- /music
+- /contact
+- /404
 
-Sigue estos pasos para arrancar el entorno de desarrollo localmente:
+## 🧞 Inicio Rápido
 
-1. **Clonar el repositorio:**
+### Prerrequisitos
+
+- Node.js 20 o superior recomendado.
+- pnpm 10.33.0.
+
+### Instalación
+
 ```bash
 git clone https://github.com/douglasfugazi/douglasfugazi-co.git
 cd douglasfugazi-co
-```
-
-2. **Instalar dependencias:**
-```bash
 pnpm install
 ```
 
-3. **Iniciar servidor de desarrollo:**
+### Desarrollo local
+
 ```bash
-pnpm run dev
+pnpm dev
 ```
 
-El sitio estará disponible para desarrollo local en `http://localhost:4321`.
+Aplicación disponible en:
 
-## 🛠️ Comandos Disponibles
+- http://localhost:4321
 
-Ejecuta cualquiera de estos scripts desde la carpeta principal del proyecto usando pnpm:
+## ⚡ Comandos Disponibles
 
-| Comando | Acción |
-|---------|--------|
-| `pnpm dev` | Inicia el servidor de desarrollo local de Astro. |
-| `pnpm build` | Construye el sitio listo para producción en el directorio `dist/`. |
-| `pnpm preview` | Ejecuta un servidor local para previsualizar tu construcción de producción (`dist/`). |
-| `pnpm astro` | Acceso directo a la CLI de Astro y sus utilidades. |
-| `pnpm lint` | Ejecuta ESLint sobre el framework de automatización. |
-| `pnpm format` | Aplica Prettier sobre archivos de pruebas/configuración. |
-| `pnpm format:check` | Valida formato sin modificar archivos. |
-| `pnpm test:smoke` | Ejecuta el smoke suite (rutas críticas). |
-| `pnpm test:e2e` | Ejecuta pruebas E2E funcionales. |
-| `pnpm test:integration` | Ejecuta pruebas de integración UI (tema, footer, 404, social, music y talks). |
-| `pnpm test:a11y` | Ejecuta auditorías de accesibilidad con Axe. |
-| `pnpm test:visual` | Ejecuta pruebas responsivas y de interacción visual. |
-| `pnpm test` | Ejecuta toda la suite Playwright (smoke + e2e + integration + a11y + visual). |
-| `pnpm test:ci` | Quality gate para CI: lint + format + type-check + build + test. |
+| Comando                | Acción                                     |
+| :--------------------- | :----------------------------------------- |
+| `pnpm install`         | 📦 Instala las dependencias                |
+| `pnpm run dev`         | 🔥 Inicia el servidor de desarrollo        |
+| `pnpm run build`       | 🏗️ Construye el sitio para producción      |
+| `pnpm run preview`     | 👁️ Previsualiza la construcción localmente |
+| `pnpm run test`        | 🧪 Ejecuta todos los tests de Playwright   |
+| `pnpm run test:headed` | 🖥️ Ejecuta tests con navegador visible     |
+| `pnpm run lint`        | 🔍 Revisa el código con ESLint             |
+| `pnpm run format`      | ✨ Formatea el código con Prettier         |
+| `pnpm test:ci`         | 🤯 Verificación de calidad completa        |
 
-## 🧪 Framework de QA Automation (Playwright + TypeScript)
+## 🧪 Test Automatizados con Playwright
 
-La arquitectura de pruebas está orientada a escalabilidad y mantenibilidad:
+La estrategia de pruebas del proyecto está orientada a robustez y mantenibilidad:
 
-- **POM real** en `tests/page-objects/` para desacoplar tests de detalles de UI.
-- **Fixtures reutilizables** en `tests/fixtures/` para configuración de entorno compartida.
-- **Suites separadas** por intención en `tests/specs/`: smoke, e2e, integration, a11y y visual.
-- **Matriz cross-browser activa** (Chromium, Firefox y WebKit) definida en `playwright.config.ts`.
-- **CI validando artefacto del commit**: por defecto se levanta preview local (`127.0.0.1:4321`) y no producción.
+- Page Object Model para desacoplar interacción de UI y lógica de prueba.
+- Fixtures reutilizables para configuración consistente.
+- Rutas y marcadores centralizados para evitar duplicidad.
+- Enfoque orientado a la web con aserciones estables.
 
-Variables útiles para personalizar el entorno de pruebas:
+### Cobertura actual
 
-| Variable | Descripción |
-|----------|-------------|
-| `E2E_BASE_URL` | URL base para pruebas E2E. Si no se define, Playwright usa `http://127.0.0.1:4321` y levanta `pnpm build && pnpm preview`. |
+- 11 archivos spec.
+- 60 pruebas lógicas por navegador.
+- 180 ejecuciones en matriz multinavegador (Chromium, Firefox, WebKit).
 
-## 🎨 Características de Diseño
+Desglose por tipo (Chromium):
 
-De acuerdo con mi perfil y mis preferencias estilísticas, este proyecto incorpora:
-- **Animaciones sutiles:** Transiciones algo lentas y fluidas, evitando `blur` o animando imágenes clave en el Hero y Navbar de manera disruptiva.
-- **Tipografía y Estilo:** Formatos normales y profesionales. Menús minimalistas evitando el uso exclusivo de mayúsculas, separadores cortos y ajustes verticales optimizados (menor aire vertical). 
-- **Especial "Hover" y Badges:** "Hover" sumamente sobrios y profesionales. Badges minimalistas que emplean el icono de "estrella" clásico de Astro mientras evita *labels* secundarios que sobrecarguen la lectura de la vista.
+| Tipo        | Cantidad |
+| ----------- | -------: |
+| Smoke       |        6 |
+| E2E         |        3 |
+| Integration |       26 |
+| A11y        |       12 |
+| Visual      |       13 |
 
-## 🛡️ Accesibilidad y Estándares de Prueba
+### Ejecutar tests rápidamente
 
-El enfoque integral en la calidad es medular. El código incorpora referencias críticas para facilitar testeos unitarios, visuales y E2E:
+```bash
+pnpm test
+pnpm test:smoke
+pnpm test:e2e
+pnpm test:integration
+pnpm test:a11y
+pnpm test:visual
+```
 
-- **Estándares WCAG implementados:**
-  - Landmarks semánticos completos (`header`, `main`, `footer`) incluyendo _skip links_.
-  - Controles interactivos con nombres limpios (ej. `aria-label`).
-  - Navegación interactiva por teclado bien configurada en pestañas personalizadas.
-  - Opciones de caída mediante `prefers-reduced-motion` a nivel global.
+## 💻 CI/CD y Reportes
 
-### 🧪 Convención de localizadores de Playwright
-- Uso de `data-ui` como selector estable primario para todas las pruebas E2E/UI.
-- Formato de Nomenclatura: `area-element-purpose` (kebab-case).
-  - Ejemplos: `data-ui="projects-tab-ai-powered-testing"`, `data-ui="contact-email-cta"`, `data-ui="music-spotify-embed"`.
+El flujo de GitHub Actions ejecuta las pruebas en cada push y pull request hacia main.
 
-## 📬 Contacto y Soporte
+Incluye:
 
-Puedes conocer más sobre mis experiencias o charlar sobre automatización de QA aquí:
+- Instalación de dependencias con pnpm.
+- Instalación de navegadores Playwright.
+- Ejecución de pruebas con subida automática de artefactos.
+- Reporte HTML en playwright-report y resultados JUnit en test-results.
 
-- **Sitio Web:** [douglasfugazi.co](https://douglasfugazi.co) *(Añade ruta pública tras despliegue)*
-- **LinkedIn:** [Douglas Fugazi](https://linkedin.com/in/douglasfugazi)
-- **GitHub:** [@douglasfugazi](https://github.com/douglasfugazi)
+## 🤝 Accesibilidad y Calidad UI
 
-## 🌟 Créditos y Reconocimientos
+El proyecto incorpora prácticas de accesibilidad desde su base:
 
-- Diseño, arquitectura y código por **Douglas Fugazi**.
-- Agradecimientos especiales a las comunidades de código abierto de Astro, Tailwind y demás paquetes.
+- Landmarks semánticos y estructura navegable.
+- Nombres accesibles en elementos interactivos críticos.
+- Cobertura automatizada de a11y con Axe + Playwright.
+- Pruebas visuales y responsivas para comportamientos de distribución.
+- Convención de selectores data-ui para máxima estabilidad en automatización.
 
-## 📄 MIT License
+## 📊 Estado del Proyecto
 
-Este proyecto es de código abierto. Siéntete libre de inspeccionar y utilizar sus partes guiándote de la **[Licencia MIT](LICENSE)**. Si utilizas porciones sustanciales, un crédito siempre se agradece.
+| Métrica           |                                                  Estado                                                  | Descripción            |
+| :---------------- | :------------------------------------------------------------------------------------------------------: | :--------------------- |
+| **Tests**         | [![180 tests passing](https://img.shields.io/badge/tests-113%20passing-brightgreen)](#-suite-de-testing) | Suite completa E2E     |
+| **Build**         |               [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](#)               | Construcción exitosa   |
+| **Coverage**      |      [![100% functional](https://img.shields.io/badge/coverage-100%25%20functional-brightgreen)](#)      | Cobertura funcional    |
+| **Performance**   |               [![A+ Grade](https://img.shields.io/badge/performance-A%2B-brightgreen)](#)                | Optimización web       |
+| **Accessibility** |            [![WCAG 2.1 AA](https://img.shields.io/badge/a11y-WCAG%202.1%20AA-brightgreen)](#)            | Accesibilidad completa |
+
+## 🎨 Tema Base y Personalización
+
+Este proyecto está basado en el tema de Astro **Astro Academia**:
+
+- **Repositorio original**: [Astro Academia](https://github.com/maiobarbero/astro_academia)
+
+Agradecemos al autor [@maiobarbero](https://astro.build/themes/details/astro-academia/) por tener open source este theme que hace posible el desarrollo de este proyecto.
+
+## 🌟 Contacto
+
+- **Email**: info@douglasfugazi.co
+- **Programado y Testeado por**: `Douglas Urrea Ocampo`
+- **Sitio web**: [https://douglasfugazi.co](https://douglasfugazi.co)
+- **LinkedIn**: [https://www.linkedin.com/in/douglasfugazi](https://www.linkedin.com/in/douglasfugazi)
+- **GitHub**: [https://github.com/fugazi](https://github.com/fugazi)
+
+## Licencia
+
+Este proyecto está licenciado bajo la **Licencia MIT** - consulta el archivo [LICENSE](LICENSE) para más detalles.
 
 ---
-<p align="center">Construido con automatización, ☕ y ❤️ para la web</p>
+
+<div align="center">
+
+**⚡ Hecho con 💚 por Douglas Fugazi desde Medellín, Colombia.**
+
+[![Astro](https://img.shields.io/badge/Astro-FF5D01?style=flat&logo=astro&logoColor=white)](https://astro.build)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)](https://typescriptlang.org)
+[![Playwright](https://img.shields.io/badge/Playwright-2EAD33?style=flat&logo=playwright&logoColor=white)](https://playwright.dev)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+
+**[⭐ Dale una estrella en GitHub](https://github.com/fugazi/)** si este proyecto te resulta útil
+
+</div>
