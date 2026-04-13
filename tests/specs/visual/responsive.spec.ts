@@ -17,22 +17,30 @@ const viewports: ReadonlyArray<Viewport> = [
   { name: 'Desktop Large', width: 1920, height: 1080, isMobile: false },
 ];
 
+/**
+ * Verifies layout and key elements across viewports.
+ */
 test.describe('Responsive design @visual', () => {
   for (const viewport of viewports) {
     test.describe(`${viewport.name} (${viewport.width}x${viewport.height})`, () => {
       test.use({ viewport: { width: viewport.width, height: viewport.height } });
 
-      test(`@visual home page renders correctly on ${viewport.name}`, async ({
-        page,
-      }) => {
+      /**
+       * Checks home and core layout in the current viewport.
+       */
+      test(`@visual home page renders correctly on ${viewport.name}`, async ({ page }) => {
         const homePage = new HomePage(page);
         const layoutPage = new LayoutPage(page);
 
         await homePage.gotoHome();
         await homePage.expectLoaded();
         await layoutPage.expectCoreLayout();
+        await expect(homePage.heroSection).toBeVisible();
       });
 
+      /**
+       * Ensures footer visibility at each resolution.
+       */
       test(`@visual footer is visible on ${viewport.name}`, async ({ page }) => {
         const homePage = new HomePage(page);
 
@@ -44,9 +52,10 @@ test.describe('Responsive design @visual', () => {
       });
 
       if (viewport.isMobile) {
-        test(`@visual mobile drawer button is visible on ${viewport.name}`, async ({
-          page,
-        }) => {
+        /**
+         * Validates drawer button presence on mobile.
+         */
+        test(`@visual mobile drawer button is visible on ${viewport.name}`, async ({ page }) => {
           const homePage = new HomePage(page);
 
           await homePage.gotoHome();
@@ -60,9 +69,15 @@ test.describe('Responsive design @visual', () => {
   }
 });
 
+/**
+ * Covers real drawer interaction on mobile.
+ */
 test.describe('Mobile-specific interactions @visual', () => {
   test.use({ viewport: { width: 375, height: 667 } });
 
+  /**
+   * Verifies the drawer opens after user interaction.
+   */
   test(`@visual mobile drawer opens correctly`, async ({ page }) => {
     await page.goto('/');
 
@@ -77,7 +92,6 @@ test.describe('Mobile-specific interactions @visual', () => {
 
     // Open drawer
     await drawerButton.click();
-    await page.waitForTimeout(500);
 
     // Drawer toggle should be checked now
     await expect(drawerToggle).toBeChecked();

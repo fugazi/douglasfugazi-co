@@ -60,7 +60,7 @@ export class ProjectsPage extends BasePage {
       if (tab === visibleTab) {
         await expect(panel).toBeVisible();
       } else {
-        await expect(panel).not.toBeVisible();
+        await expect(panel).toBeHidden();
       }
     }
   }

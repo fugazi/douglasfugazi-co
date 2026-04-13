@@ -9,15 +9,15 @@
     "preview": "astro preview",
     "astro": "astro",
     "lint": "eslint --config tests/.eslintrc.cjs \"tests/**/*.ts\"",
-    "format": "prettier --config tests/.prettierrc.json --write \"tests/**/*.ts\" .github/workflows/playwright.yml .github/workflows/deploy.yml",
-    "format:check": "prettier --config tests/.prettierrc.json --check \"tests/**/*.ts\" .github/workflows/playwright.yml .github/workflows/deploy.yml",
+    "format": "prettier --config tests/.prettierrc.json --write \"tests/**/*.ts\" .github/workflows/*.yml",
+    "format:check": "prettier --config tests/.prettierrc.json --check \"tests/**/*.ts\" .github/workflows/*.yml",
     "test": "playwright test",
     "test:smoke": "playwright test --grep @smoke",
     "test:e2e": "playwright test --grep @e2e",
     "test:a11y": "playwright test --grep @a11y",
     "test:integration": "playwright test --grep @integration",
     "test:visual": "playwright test --grep @visual",
-    "test:ci": "pnpm run lint && pnpm run format:check && pnpm run build && pnpm run test"
+    "test:ci": "pnpm run lint && pnpm run format:check && pnpm exec tsc --noEmit && pnpm run build && pnpm run test"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",

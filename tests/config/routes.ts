@@ -12,6 +12,10 @@ export type RouteDefinition = {
   navToken?: 'home' | 'about' | 'projects' | 'talks' | 'music' | 'contact';
 };
 
+export type NavigationRouteDefinition = RouteDefinition & {
+  navToken: NonNullable<RouteDefinition['navToken']>;
+};
+
 /**
  * All application routes
  */
@@ -26,5 +30,7 @@ export const appRoutes: ReadonlyArray<RouteDefinition> = [
 
 // For convenience - tests can use appRoutes directly or these aliases
 export const smokeRoutes = appRoutes;
-export const e2eNavigationRoutes = appRoutes;
+export const e2eNavigationRoutes: ReadonlyArray<NavigationRouteDefinition> = appRoutes.filter(
+  (route): route is NavigationRouteDefinition => route.navToken !== undefined,
+);
 export const a11yRoutes = appRoutes;

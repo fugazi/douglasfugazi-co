@@ -5,11 +5,13 @@ import { BasePage } from './base.page';
 export type Theme = 'light' | 'dark';
 
 export class ThemePage extends BasePage {
+  readonly htmlRoot: Locator;
   readonly themeToggleLabel: Locator;
   readonly themeToggleInput: Locator;
 
   constructor(page: Page) {
     super(page);
+    this.htmlRoot = this.page.locator('html');
     this.themeToggleLabel = this.byUi('theme-toggle-label');
     this.themeToggleInput = this.byUi('theme-toggle');
   }
@@ -27,9 +29,9 @@ export class ThemePage extends BasePage {
    * Toggle the theme (light <-> dark)
    */
   async toggleTheme(): Promise<void> {
+    const isCheckedBefore = await this.themeToggleInput.isChecked();
     await this.themeToggleLabel.click();
-    // Wait for theme transition
-    await this.page.waitForTimeout(300);
+    await expect.poll(async () => this.themeToggleInput.isChecked()).toBe(!isCheckedBefore);
   }
 
   /**
@@ -40,6 +42,7 @@ export class ThemePage extends BasePage {
     if (currentTheme !== theme) {
       await this.toggleTheme();
     }
+    await this.expectTheme(theme);
   }
 
   /**
@@ -54,46 +57,32 @@ export class ThemePage extends BasePage {
    * This checks the HTML class or data attribute
    */
   async expectTheme(theme: Theme): Promise<void> {
-    const html = this.page.locator('html');
+    const isDarkExpected = theme === 'dark';
 
-    if (theme === 'dark') {
-      // Check for common dark theme indicators
-      const hasDarkClass = await html.evaluate((el) =>
-        el.classList.contains('dark'),
-      );
-      const hasDarkData =
-        (await html.getAttribute('data-theme')) === 'dark';
-
-      // At least one should be true for dark theme
-      const isDark = hasDarkClass || hasDarkData;
-      expect(isDark).toBeTruthy();
+    if (isDarkExpected) {
+      await expect(this.themeToggleInput).toBeChecked();
     } else {
-      // For light theme, expect not dark
-      const hasDarkClass = await html.evaluate((el) =>
-        el.classList.contains('dark'),
-      );
-      const hasDarkData =
-        (await html.getAttribute('data-theme')) === 'dark';
-
-      const isDark = hasDarkClass || hasDarkData;
-      expect(isDark).toBeFalsy();
+      await expect(this.themeToggleInput).not.toBeChecked();
     }
+
+    await expect
+      .poll(async () => {
+        const dataTheme = await this.htmlRoot.getAttribute('data-theme');
+        const classAttr = await this.htmlRoot.getAttribute('class');
+        const hasDarkClass = classAttr?.split(/\s+/).includes('dark') ?? false;
+        return dataTheme === 'dark' || hasDarkClass;
+      })
+      .toBe(isDarkExpected);
   }
 
   /**
    * Expect theme persistence after navigation
    */
-  async expectThemePersistsAfterNavigation(
-    theme: Theme,
-    path: string,
-  ): Promise<void> {
-    const currentTheme = await this.getCurrentTheme();
-    expect(currentTheme).toBe(theme);
+  async expectThemePersistsAfterNavigation(theme: Theme, path: string): Promise<void> {
+    await this.expectTheme(theme);
 
     await this.page.goto(path);
-    await this.page.waitForLoadState('networkidle');
-
-    const newTheme = await this.getCurrentTheme();
-    expect(newTheme).toBe(theme);
+    await expect(this.themeToggleInput).toBeVisible();
+    await this.expectTheme(theme);
   }
 }

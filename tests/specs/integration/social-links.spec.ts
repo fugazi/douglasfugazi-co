@@ -3,10 +3,14 @@ import { HomePage } from '../../page-objects/home.page';
 import { AboutPage } from '../../page-objects/about.page';
 import { ContactPage } from '../../page-objects/contact.page';
 
+/**
+ * Validates availability and format of social links on key pages.
+ */
 test.describe('Social icons links @integration', () => {
-  test('@integration social icons are present on home page', async ({
-    page,
-  }) => {
+  /**
+   * Checks social CTAs visible on home.
+   */
+  test('@integration social icons are present on home page', async ({ page }) => {
     const homePage = new HomePage(page);
 
     await homePage.gotoHome();
@@ -15,11 +19,13 @@ test.describe('Social icons links @integration', () => {
     // Home page has email and LinkedIn CTAs
     await homePage.expectEmailCtaConfigured();
     await homePage.expectLinkedInCtaConfigured();
+    await expect(homePage.emailCta).toBeVisible();
   });
 
-  test('@integration social icons are present on about page', async ({
-    page,
-  }) => {
+  /**
+   * Checks social CTAs visible on about.
+   */
+  test('@integration social icons are present on about page', async ({ page }) => {
     const aboutPage = new AboutPage(page);
 
     await aboutPage.gotoAbout();
@@ -28,11 +34,13 @@ test.describe('Social icons links @integration', () => {
     // About page has email and LinkedIn CTAs in the CTA section
     await aboutPage.expectEmailCtaConfigured();
     await aboutPage.expectLinkedInCtaConfigured();
+    await expect(aboutPage.emailCta).toBeVisible();
   });
 
-  test('@integration social icons are present on contact page', async ({
-    page,
-  }) => {
+  /**
+   * Checks social CTAs visible on contact.
+   */
+  test('@integration social icons are present on contact page', async ({ page }) => {
     const contactPage = new ContactPage(page);
 
     await contactPage.gotoContact();
@@ -41,11 +49,13 @@ test.describe('Social icons links @integration', () => {
     // Contact page has email and LinkedIn CTAs
     await contactPage.expectEmailCtaConfigured();
     await contactPage.expectLinkedInCtaConfigured();
+    await expect(contactPage.emailCta).toBeVisible();
   });
 
-  test('@integration email links have proper mailto format', async ({
-    page,
-  }) => {
+  /**
+   * Verifies email links use the mailto scheme.
+   */
+  test('@integration email links have proper mailto format', async ({ page }) => {
     const homePage = new HomePage(page);
 
     await homePage.gotoHome();
@@ -62,9 +72,10 @@ test.describe('Social icons links @integration', () => {
     }
   });
 
-  test('@integration LinkedIn links point to correct domain', async ({
-    page,
-  }) => {
+  /**
+   * Verifies LinkedIn links target the expected domain.
+   */
+  test('@integration LinkedIn links point to correct domain', async ({ page }) => {
     const homePage = new HomePage(page);
 
     await homePage.gotoHome();

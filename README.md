@@ -45,14 +45,12 @@ El proyecto sigue una estructura limpia y orientada a componentes, nativa de Ast
  ┃ ┣ 📂 pages/             # Sistema de enrutamiento (/about, /contact, /projects, /music)
  ┃ ┗ 📜 settings.ts        # Configuración global del sitio, perfiles y metadatos
  ┣ 📂 tests/
- ┃ ┣ 📂 config/            # Configuración Playwright (entorno, rutas, thresholds Lighthouse)
- ┃ ┣ 📂 fixtures/          # Fixtures reutilizables (datos, entorno, auth/session)
+ ┃ ┣ 📂 config/            # Configuración Playwright (entorno y rutas)
+ ┃ ┣ 📂 fixtures/          # Fixtures reutilizables de test
  ┃ ┣ 📂 page-objects/      # Page Object Model para encapsular interacciones UI
- ┃ ┣ 📂 utils/             # Helpers reutilizables (a11y, navegación, Lighthouse)
- ┃ ┣ 📂 smoke/             # Suite smoke
- ┃ ┣ 📂 e2e/               # Suite E2E
- ┃ ┣ 📂 a11y/              # Suite accesibilidad
- ┃ ┗ 📜 playwright.config.ts
+ ┃ ┣ 📂 specs/             # Suites por tipo (smoke, e2e, integration, a11y, visual)
+ ┃ ┗ 📂 utils/             # Helpers reutilizables (a11y)
+ ┣ 📜 playwright.config.ts # Configuración global de Playwright
  ┣ 📜 astro.config.mjs     # Configuración de Astro
  ┣ 📜 tailwind.config.mjs  # Configuración del diseño base
  ┗ 📜 package.json         # Dependencias y scripts vitales
@@ -105,26 +103,27 @@ Ejecuta cualquiera de estos scripts desde la carpeta principal del proyecto usan
 | `pnpm format:check` | Valida formato sin modificar archivos. |
 | `pnpm test:smoke` | Ejecuta el smoke suite (rutas críticas). |
 | `pnpm test:e2e` | Ejecuta pruebas E2E funcionales. |
+| `pnpm test:integration` | Ejecuta pruebas de integración UI (tema, footer, 404, social, music y talks). |
 | `pnpm test:a11y` | Ejecuta auditorías de accesibilidad con Axe. |
-| `pnpm test` | Ejecuta todas las suites QA (smoke + e2e + a11y). |
-| `pnpm test:ci` | Quality gate para CI: lint + format + build + test. |
+| `pnpm test:visual` | Ejecuta pruebas responsivas y de interacción visual. |
+| `pnpm test` | Ejecuta toda la suite Playwright (smoke + e2e + integration + a11y + visual). |
+| `pnpm test:ci` | Quality gate para CI: lint + format + type-check + build + test. |
 
 ## 🧪 Framework de QA Automation (Playwright + TypeScript)
 
 La arquitectura de pruebas está orientada a escalabilidad y mantenibilidad:
 
 - **POM real** en `tests/page-objects/` para desacoplar tests de detalles de UI.
-- **Fixtures reutilizables** en `tests/fixtures/` para datos de prueba, configuración de entorno y sesión autenticada.
-- **Suites separadas** por intención en `tests/`: smoke, e2e y a11y.
-- **Ejecución headless obligatoria** definida en `tests/playwright.config.ts`.
+- **Fixtures reutilizables** en `tests/fixtures/` para configuración de entorno compartida.
+- **Suites separadas** por intención en `tests/specs/`: smoke, e2e, integration, a11y y visual.
+- **Matriz cross-browser activa** (Chromium, Firefox y WebKit) definida en `playwright.config.ts`.
+- **CI validando artefacto del commit**: por defecto se levanta preview local (`127.0.0.1:4321`) y no producción.
 
 Variables útiles para personalizar el entorno de pruebas:
 
 | Variable | Descripción |
 |----------|-------------|
-| `E2E_BASE_URL` | URL base para pruebas E2E (por defecto `http://127.0.0.1:4321`). |
-| `E2E_PREVIEW_COMMAND` | Comando para arrancar el servidor usado por Playwright. |
-| `E2E_AUTH_STORAGE_STATE` | Ruta al storage state para fixtures autenticados. |
+| `E2E_BASE_URL` | URL base para pruebas E2E. Si no se define, Playwright usa `http://127.0.0.1:4321` y levanta `pnpm build && pnpm preview`. |
 
 ## 🎨 Características de Diseño
 

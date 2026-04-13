@@ -2,19 +2,25 @@ import { test, expect } from '../../fixtures/test-fixtures';
 import { NotFoundPage } from '../../page-objects/not-found.page';
 import { HomePage } from '../../page-objects/home.page';
 
+/**
+ * Covers content, navigation, and metadata of the 404 page.
+ */
 test.describe('404 Not Found page @integration', () => {
-  test('@integration navigating to non-existent route shows 404 page', async ({
-    page,
-  }) => {
+  /**
+   * Verifies correct rendering when accessing a non-existent route.
+   */
+  test('@integration navigating to non-existent route shows 404 page', async ({ page }) => {
     const notFoundPage = new NotFoundPage(page);
 
     await notFoundPage.gotoNotFound();
+    await expect(page).toHaveURL(/this-page-does-not-exist\/?$/);
     await notFoundPage.expectLoaded();
   });
 
-  test('@integration 404 page has proper heading and content', async ({
-    page,
-  }) => {
+  /**
+   * Validates heading hierarchy and guidance message.
+   */
+  test('@integration 404 page has proper heading and content', async ({ page }) => {
     const notFoundPage = new NotFoundPage(page);
 
     await notFoundPage.gotoNotFound();
@@ -30,9 +36,10 @@ test.describe('404 Not Found page @integration', () => {
     await expect(page.getByText(/coffee break/i)).toBeVisible();
   });
 
-  test('@integration 404 page home button navigates to home', async ({
-    page,
-  }) => {
+  /**
+   * Checks that the primary CTA redirects correctly to home.
+   */
+  test('@integration 404 page home button navigates to home', async ({ page }) => {
     const notFoundPage = new NotFoundPage(page);
     const homePage = new HomePage(page);
 
@@ -47,9 +54,10 @@ test.describe('404 Not Found page @integration', () => {
     await homePage.expectLoaded();
   });
 
-  test('@integration 404 page back button returns to previous page', async ({
-    page,
-  }) => {
+  /**
+   * Verifies that the back button respects browser history.
+   */
+  test('@integration 404 page back button returns to previous page', async ({ page }) => {
     const notFoundPage = new NotFoundPage(page);
     const homePage = new HomePage(page);
 
@@ -68,6 +76,9 @@ test.describe('404 Not Found page @integration', () => {
     await expect(page).toHaveURL('/');
   });
 
+  /**
+   * Confirms visibility of essential interactive elements.
+   */
   test('@integration 404 page is accessible', async ({ page }) => {
     const notFoundPage = new NotFoundPage(page);
 
@@ -86,6 +97,9 @@ test.describe('404 Not Found page @integration', () => {
     await expect(notFoundPage.backButton).toBeVisible();
   });
 
+  /**
+   * Validates expected SEO metadata for not found pages.
+   */
   test('@integration 404 page has proper meta tags', async ({ page }) => {
     const notFoundPage = new NotFoundPage(page);
 
@@ -93,10 +107,7 @@ test.describe('404 Not Found page @integration', () => {
 
     // Check for proper robots meta tag (should be noindex)
     const robotsMeta = page.locator('meta[name="robots"]');
-    await expect(robotsMeta).toHaveAttribute(
-      'content',
-      /noindex|nofollow|noarchive/,
-    );
+    await expect(robotsMeta).toHaveAttribute('content', /noindex|nofollow|noarchive/);
 
     // Check for proper title
     await expect(page).toHaveTitle(/404|not found/i);

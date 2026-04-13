@@ -2,79 +2,98 @@ import { test, expect } from '../../fixtures/test-fixtures';
 import { HomePage } from '../../page-objects/home.page';
 import { ThemePage } from '../../page-objects/theme.page';
 
+/**
+ * Validates functional and accessible behavior of the theme toggle.
+ */
 test.describe('Dark mode toggle @integration', () => {
+  /**
+   * Confirms the toggle is available on all key pages.
+   */
   test('@integration theme toggle is visible on all pages', async ({ page }) => {
     const themePage = new ThemePage(page);
     const homePage = new HomePage(page);
 
-    await homePage.gotoHome();
-    await homePage.expectLoaded();
-    await themePage.expectToggleVisible();
+    await test.step('Open home and validate theme toggle', async () => {
+      await homePage.gotoHome();
+      await homePage.expectLoaded();
+      await themePage.expectToggleVisible();
+    });
 
     // Navigate to different pages and verify toggle is always visible
     const pages = ['/about', '/projects', '/talks', '/music', '/contact'];
 
     for (const path of pages) {
-      await page.goto(path);
-      await page.waitForLoadState('domcontentloaded');
-      await themePage.expectToggleVisible();
+      await test.step(`Validate toggle visibility on ${path}`, async () => {
+        await page.goto(path);
+        await themePage.expectToggleVisible();
+      });
     }
+
+    await expect(themePage.themeToggleLabel).toBeVisible();
   });
 
-  test('@integration user can toggle between light and dark themes', async ({
-    page,
-  }) => {
+  /**
+   * Verifies that theme state changes after interaction.
+   */
+  test('@integration user can toggle between light and dark themes', async ({ page }) => {
     const themePage = new ThemePage(page);
     const homePage = new HomePage(page);
 
-    await homePage.gotoHome();
-    await homePage.expectLoaded();
-    await themePage.expectToggleVisible();
+    await test.step('Open home and capture current state', async () => {
+      await homePage.gotoHome();
+      await homePage.expectLoaded();
+      await themePage.expectToggleVisible();
+    });
 
-    // Toggle theme and verify toggle interaction works
     const isCheckedBefore = await themePage.themeToggleInput.isChecked();
-    await themePage.toggleTheme();
-    await page.waitForTimeout(500); // Wait for theme transition
 
-    const isCheckedAfter = await themePage.themeToggleInput.isChecked();
-
-    // The checkbox state should change
-    expect(isCheckedAfter).not.toBe(isCheckedBefore);
+    await test.step('Toggle theme and verify state changed', async () => {
+      await themePage.toggleTheme();
+      await expect.poll(async () => themePage.themeToggleInput.isChecked()).toBe(!isCheckedBefore);
+    });
   });
 
+  /**
+   * Checks that the toggle can be switched on and off.
+   */
   test('@integration theme toggle is clickable', async ({ page }) => {
     const themePage = new ThemePage(page);
     const homePage = new HomePage(page);
 
-    await homePage.gotoHome();
-    await homePage.expectLoaded();
+    await test.step('Open home page', async () => {
+      await homePage.gotoHome();
+      await homePage.expectLoaded();
+      await themePage.expectToggleVisible();
+    });
 
-    // Verify the toggle can be clicked
-    await themePage.themeToggleLabel.click();
-    await page.waitForTimeout(300);
+    const initialState = await themePage.themeToggleInput.isChecked();
 
-    // Verify it can be clicked again
-    await themePage.themeToggleLabel.click();
-    await page.waitForTimeout(300);
+    await test.step('Toggle once and verify state changed', async () => {
+      await themePage.toggleTheme();
+      await expect.poll(async () => themePage.themeToggleInput.isChecked()).toBe(!initialState);
+    });
 
-    // No errors thrown
-    await expect(themePage.themeToggleLabel).toBeVisible();
+    await test.step('Toggle again and verify state restored', async () => {
+      await themePage.toggleTheme();
+      await expect.poll(async () => themePage.themeToggleInput.isChecked()).toBe(initialState);
+    });
   });
 
-  test('@integration theme toggle has proper ARIA attributes', async ({
-    page,
-  }) => {
+  /**
+   * Validates essential ARIA attributes of the theme control.
+   */
+  test('@integration theme toggle has proper ARIA attributes', async ({ page }) => {
     const themePage = new ThemePage(page);
     const homePage = new HomePage(page);
 
-    await homePage.gotoHome();
-    await homePage.expectLoaded();
+    await test.step('Open home page', async () => {
+      await homePage.gotoHome();
+      await homePage.expectLoaded();
+    });
 
-    // Check for proper ARIA attributes
-    await expect(themePage.themeToggleInput).toHaveAttribute('role', 'switch');
-    await expect(themePage.themeToggleLabel).toHaveAttribute(
-      'aria-label',
-      'Toggle color theme',
-    );
+    await test.step('Validate ARIA attributes', async () => {
+      await expect(themePage.themeToggleInput).toHaveAttribute('role', 'switch');
+      await expect(themePage.themeToggleLabel).toHaveAttribute('aria-label', 'Toggle color theme');
+    });
   });
 });

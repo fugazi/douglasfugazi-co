@@ -1,6 +1,11 @@
 import { test, expect } from '../../fixtures/test-fixtures';
+import { appRoutes } from '../../config/routes';
 import { HomePage } from '../../page-objects/home.page';
+import { FooterPage } from '../../page-objects/footer.page';
 
+/**
+ * Verifies presence, links, and semantics of the global footer.
+ */
 test.describe('Footer links @integration', () => {
   test.beforeEach(async ({ page }) => {
     const homePage = new HomePage(page);
@@ -8,80 +13,72 @@ test.describe('Footer links @integration', () => {
     await homePage.expectLoaded();
   });
 
+  /**
+   * Confirms the footer remains visible on all main routes.
+   */
   test('@integration footer is visible on all pages', async ({ page }) => {
-    const footer = page.locator('[data-ui="site-footer"]');
+    const footerPage = new FooterPage(page);
 
     // Check on home page
-    await expect(footer).toBeVisible();
+    await footerPage.expectVisible();
 
     // Navigate to other pages and verify footer persists
-    const pages = ['/about', '/projects', '/talks', '/music', '/contact'];
+    const secondaryRoutes = appRoutes.filter((route) => route.path !== '/');
 
-    for (const path of pages) {
-      await page.goto(path);
-      await page.waitForLoadState('networkidle');
-      await expect(footer).toBeVisible();
+    for (const route of secondaryRoutes) {
+      await page.goto(route.path);
+      await expect(page.locator(`[data-ui="${route.marker}"]`)).toBeVisible();
+      await footerPage.expectVisible();
     }
   });
 
-  test('@integration footer contains copyright information', async ({
-    page,
-  }) => {
-    const footer = page.locator('[data-ui="site-footer"]');
+  /**
+   * Validates current year and rendered branding in the footer.
+   */
+  test('@integration footer contains copyright information', async ({ page }) => {
+    const footerPage = new FooterPage(page);
 
-    // Should contain current year
     const currentYear = new Date().getFullYear();
-    await expect(footer).toContainText(currentYear.toString());
-
-    // Should contain brand name
-    await expect(footer).toContainText('Douglas Fugazi');
+    await footerPage.expectCopyright('Douglas Fugazi', currentYear);
+    await expect(footerPage.footer).toBeVisible();
   });
 
-  test('@integration footer Astro link is properly configured', async ({
-    page,
-  }) => {
-    const astroLink = page.locator('[data-ui="footer-link-astro"]');
+  /**
+   * Verifies external link configuration for Astro.
+   */
+  test('@integration footer Astro link is properly configured', async ({ page }) => {
+    const footerPage = new FooterPage(page);
 
-    await expect(astroLink).toBeVisible();
-    await expect(astroLink).toHaveAttribute('href', 'https://astro.build/');
-    await expect(astroLink).toHaveAttribute('target', '_blank');
-    await expect(astroLink).toHaveAttribute('rel', 'noopener noreferrer');
+    await footerPage.expectLinkConfigured(footerPage.astroLink, 'https://astro.build/');
+    await expect(footerPage.astroLink).toBeVisible();
   });
 
-  test('@integration footer Playwright link is properly configured', async ({
-    page,
-  }) => {
-    const playwrightLink = page.locator('[data-ui="footer-link-playwright"]');
+  /**
+   * Verifies external link configuration for Playwright.
+   */
+  test('@integration footer Playwright link is properly configured', async ({ page }) => {
+    const footerPage = new FooterPage(page);
 
-    await expect(playwrightLink).toBeVisible();
-    await expect(playwrightLink).toHaveAttribute(
-      'href',
-      'https://playwright.dev/',
-    );
-    await expect(playwrightLink).toHaveAttribute('target', '_blank');
-    await expect(playwrightLink).toHaveAttribute('rel', 'noopener noreferrer');
+    await footerPage.expectLinkConfigured(footerPage.playwrightLink, 'https://playwright.dev/');
+    await expect(footerPage.playwrightLink).toBeVisible();
   });
 
+  /**
+   * Ensures external links open safely in a new tab.
+   */
   test('@integration footer links open in new tab', async ({ page }) => {
-    // Get all footer links
-    const footer = page.locator('[data-ui="site-footer"]');
-    const links = footer.locator('a[href^="http"]');
-
-    const count = await links.count();
-
-    for (let i = 0; i < count; i++) {
-      const link = links.nth(i);
-
-      // External links should open in new tab
-      await expect(link).toHaveAttribute('target', '_blank');
-      await expect(link).toHaveAttribute('rel', 'noopener noreferrer');
-    }
+    const footerPage = new FooterPage(page);
+    await footerPage.expectExternalLinksOpenInNewTab();
+    await expect(footerPage.externalLinks).toHaveCount(2);
   });
 
+  /**
+   * Checks for the semantic footer landmark.
+   */
   test('@integration footer has proper ARIA attributes', async ({ page }) => {
-    const footer = page.locator('[data-ui="site-footer"]');
+    const footerPage = new FooterPage(page);
 
-    await expect(footer).toBeVisible();
+    await footerPage.expectVisible();
     // footer tag is sufficient as a landmark
 
     // Check for proper landmark
