@@ -3,6 +3,8 @@ dist/
 
 # generated types
 .astro/
+.gitattributes
+.copilot/
 
 # dependencies
 node_modules/
@@ -23,6 +25,7 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 # Squad: ignore runtime state (logs, inbox, sessions)
+.squad/
 .squad/orchestration-log/
 .squad/log/
 .squad/decisions/inbox/
@@ -40,5 +43,3 @@ pnpm-debug.log*
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
-/tests/test-results/
-/tests/playwright-report/

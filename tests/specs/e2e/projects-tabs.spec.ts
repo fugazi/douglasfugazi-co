@@ -1,5 +1,5 @@
-import { test, expect } from '../fixtures/test-fixtures';
-import { ProjectsPage, projectsTabs } from '../page-objects/projects.page';
+import { test, expect } from '../../fixtures/test-fixtures';
+import { ProjectsPage, projectsTabs } from '../../page-objects/projects.page';
 
 test.describe('Projects interactions @e2e', () => {
   test('@e2e users can switch project category tabs', async ({ page }) => {
@@ -9,8 +9,7 @@ test.describe('Projects interactions @e2e', () => {
     await projectsPage.expectLoaded();
 
     for (const tab of projectsTabs) {
-      await projectsPage.openTab(tab);
-      await projectsPage.expectPanelVisible(tab);
+      await projectsPage.switchToTabAndVerify(tab);
     }
 
     await expect(page.locator('[data-ui="projects-page"]')).toBeVisible();

@@ -27,4 +27,12 @@ export class HomePage extends BasePage {
     await expect(this.skillsSection).toBeVisible();
     await expect(this.contactSection).toBeVisible();
   }
+
+  async expectEmailCtaConfigured(): Promise<void> {
+    await expect(this.emailCta).toHaveAttribute('href', /^mailto:/);
+  }
+
+  async expectLinkedInCtaConfigured(): Promise<void> {
+    await expect(this.linkedInCta).toHaveAttribute('href', /linkedin/i);
+  }
 }

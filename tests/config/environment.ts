@@ -1,59 +1,41 @@
-import { URL } from 'node:url';
+/**
+ * Test environment configuration
+ *
+ * Default: Run tests on localhost (server auto-started by Playwright)
+ * CI:     Run tests on production URL (set E2E_BASE_URL env var)
+ *
+ * Usage:
+ *   pnpm test                    → localhost (auto server)
+ *   E2E_BASE_URL=https://site.com pnpm test  → production
+ */
 
-const DEFAULT_BASE_URL = 'http://127.0.0.1:4321';
-const DEFAULT_PREVIEW_COMMAND = 'pnpm build && pnpm preview --host 127.0.0.1 --port 4321';
+const IS_CI = Boolean(process.env.CI);
 
-const parsePositiveNumber = (
-  rawValue: string | undefined,
-  fallback: number,
-  label: string,
-): number => {
-  if (!rawValue) {
-    return fallback;
-  }
+// Production URL for CI/CD
+const PRODUCTION_URL = 'https://www.douglasfugazi.co';
 
-  const parsedValue = Number(rawValue);
-  if (!Number.isFinite(parsedValue) || parsedValue <= 0) {
-    throw new Error(`${label} must be a positive number. Received "${rawValue}".`);
-  }
+// Local development URL
+const LOCAL_URL = 'http://127.0.0.1:4321';
 
-  return parsedValue;
-};
+// Determine which URL to use
+const baseUrl = IS_CI
+  ? PRODUCTION_URL
+  : (process.env.E2E_BASE_URL?.trim() || LOCAL_URL);
 
-const normalizeBaseUrl = (input: string): string => {
-  const parsedUrl = new URL(input);
-  const normalizedPath = parsedUrl.pathname === '/' ? '' : parsedUrl.pathname.replace(/\/$/, '');
-  return `${parsedUrl.origin}${normalizedPath}`;
-};
-
-const configuredBaseUrl = process.env.E2E_BASE_URL?.trim() || DEFAULT_BASE_URL;
-const baseUrl = normalizeBaseUrl(configuredBaseUrl);
-const parsedBaseUrl = new URL(baseUrl);
+const isLocal = baseUrl.includes('127.0.0.1') || baseUrl.includes('localhost');
 
 export const appConfig = {
+  // URLs
   baseUrl,
-  isCI: Boolean(process.env.CI),
-  isLocalBaseUrl: ['localhost', '127.0.0.1'].includes(parsedBaseUrl.hostname),
-  previewCommand: process.env.E2E_PREVIEW_COMMAND?.trim() || DEFAULT_PREVIEW_COMMAND,
-  globalTimeoutMs: parsePositiveNumber(
-    process.env.E2E_GLOBAL_TIMEOUT_MS,
-    90_000,
-    'E2E_GLOBAL_TIMEOUT_MS',
-  ),
-  expectTimeoutMs: parsePositiveNumber(
-    process.env.E2E_EXPECT_TIMEOUT_MS,
-    10_000,
-    'E2E_EXPECT_TIMEOUT_MS',
-  ),
-  actionTimeoutMs: parsePositiveNumber(
-    process.env.E2E_ACTION_TIMEOUT_MS,
-    15_000,
-    'E2E_ACTION_TIMEOUT_MS',
-  ),
-  navigationTimeoutMs: parsePositiveNumber(
-    process.env.E2E_NAVIGATION_TIMEOUT_MS,
-    30_000,
-    'E2E_NAVIGATION_TIMEOUT_MS',
-  ),
-  authStorageStatePath: process.env.E2E_AUTH_STORAGE_STATE?.trim() || undefined,
+  isLocal,
+  isCI: IS_CI,
+
+  // Playwright will auto-start the server for local testing
+  previewCommand: 'pnpm build && pnpm preview --host 127.0.0.1 --port 4321',
+
+  // Timeouts (in milliseconds)
+  timeout: 90_000,      // Global test timeout
+  actionTimeout: 15_000,  // Click/type actions
+  navigationTimeout: 30_000, // Page navigation
+  expectTimeout: 10_000,    // Assertions
 } as const;

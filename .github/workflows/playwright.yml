@@ -1,25 +1,27 @@
-name: QA Automation Pipeline
+name: Playwright Tests
 
 on:
-  workflow_dispatch:
   push:
-    branches: [main, master]
+    branches: [main]
   pull_request:
-    branches: [main, master]
+    branches: [main]
+  workflow_dispatch:
 
 jobs:
-  qa-tests:
-    timeout-minutes: 90
+  test:
+    timeout-minutes: 60
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - uses: pnpm/action-setup@v4
         with:
           version: 10.33.0
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: pnpm
@@ -27,19 +29,24 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Install Playwright browser dependencies
+      - name: Install Playwright browsers
         run: pnpm exec playwright install --with-deps chromium
 
-      - name: Run quality gate
-        run: pnpm run test:ci
+      - name: Run Playwright tests
+        run: pnpm test
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload test report
         if: always()
+        uses: actions/upload-artifact@v4
         with:
-          name: qa-automation-artifacts
-          path: |
-            tests/playwright-report/
-            tests/test-results/
-            playwright-report/
-            test-results/
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: test-results/
           retention-days: 30

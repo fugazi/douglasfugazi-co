@@ -1,16 +1,16 @@
 import { defineConfig, devices } from '@playwright/test';
 
-import { appConfig } from './config/environment';
+import { appConfig } from './tests/config/environment';
 
 export default defineConfig({
-  testDir: './',
+  testDir: './tests/specs',
   fullyParallel: true,
   forbidOnly: appConfig.isCI,
   retries: appConfig.isCI ? 2 : 1,
   workers: appConfig.isCI ? 2 : undefined,
-  timeout: appConfig.globalTimeoutMs,
+  timeout: appConfig.timeout,
   expect: {
-    timeout: appConfig.expectTimeoutMs,
+    timeout: appConfig.expectTimeout,
   },
   reporter: [
     ['list'],
@@ -21,8 +21,8 @@ export default defineConfig({
   use: {
     baseURL: appConfig.baseUrl,
     headless: true,
-    actionTimeout: appConfig.actionTimeoutMs,
-    navigationTimeout: appConfig.navigationTimeoutMs,
+    actionTimeout: appConfig.actionTimeout,
+    navigationTimeout: appConfig.navigationTimeout,
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
@@ -33,7 +33,7 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'] },
     },
   ],
-  webServer: appConfig.isLocalBaseUrl
+  webServer: appConfig.isLocal
     ? {
         command: appConfig.previewCommand,
         url: appConfig.baseUrl,
