@@ -1,14 +1,11 @@
 import { test, expect } from '../../fixtures/test-fixtures';
 import { appRoutes } from '../../config/routes';
-import { HomePage } from '../../page-objects/home.page';
-import { FooterPage } from '../../page-objects/footer.page';
 
 /**
  * Verifies presence, links, and semantics of the global footer.
  */
 test.describe('Footer links @integration', () => {
-  test.beforeEach(async ({ page }) => {
-    const homePage = new HomePage(page);
+  test.beforeEach(async ({ homePage }) => {
     await homePage.gotoHome();
     await homePage.expectLoaded();
   });
@@ -16,9 +13,7 @@ test.describe('Footer links @integration', () => {
   /**
    * Confirms the footer remains visible on all main routes.
    */
-  test('@integration footer is visible on all pages', async ({ page }) => {
-    const footerPage = new FooterPage(page);
-
+  test('@integration footer is visible on all pages', async ({ page, footerPage }) => {
     // Check on home page
     await footerPage.expectVisible();
 
@@ -35,9 +30,7 @@ test.describe('Footer links @integration', () => {
   /**
    * Validates current year and rendered branding in the footer.
    */
-  test('@integration footer contains copyright information', async ({ page }) => {
-    const footerPage = new FooterPage(page);
-
+  test('@integration footer contains copyright information', async ({ footerPage }) => {
     const currentYear = new Date().getFullYear();
     await footerPage.expectCopyright('Douglas Fugazi', currentYear);
     await expect(footerPage.footer).toBeVisible();
@@ -46,9 +39,7 @@ test.describe('Footer links @integration', () => {
   /**
    * Verifies external link configuration for Astro.
    */
-  test('@integration footer Astro link is properly configured', async ({ page }) => {
-    const footerPage = new FooterPage(page);
-
+  test('@integration footer Astro link is properly configured', async ({ footerPage }) => {
     await footerPage.expectLinkConfigured(footerPage.astroLink, 'https://astro.build/');
     await expect(footerPage.astroLink).toBeVisible();
   });
@@ -56,9 +47,7 @@ test.describe('Footer links @integration', () => {
   /**
    * Verifies external link configuration for Playwright.
    */
-  test('@integration footer Playwright link is properly configured', async ({ page }) => {
-    const footerPage = new FooterPage(page);
-
+  test('@integration footer Playwright link is properly configured', async ({ footerPage }) => {
     await footerPage.expectLinkConfigured(footerPage.playwrightLink, 'https://playwright.dev/');
     await expect(footerPage.playwrightLink).toBeVisible();
   });
@@ -66,8 +55,7 @@ test.describe('Footer links @integration', () => {
   /**
    * Ensures external links open safely in a new tab.
    */
-  test('@integration footer links open in new tab', async ({ page }) => {
-    const footerPage = new FooterPage(page);
+  test('@integration footer links open in new tab', async ({ footerPage }) => {
     await footerPage.expectExternalLinksOpenInNewTab();
     await expect(footerPage.externalLinks).toHaveCount(2);
   });
@@ -75,9 +63,7 @@ test.describe('Footer links @integration', () => {
   /**
    * Checks for the semantic footer landmark.
    */
-  test('@integration footer has proper ARIA attributes', async ({ page }) => {
-    const footerPage = new FooterPage(page);
-
+  test('@integration footer has proper ARIA attributes', async ({ page, footerPage }) => {
     await footerPage.expectVisible();
     // footer tag is sufficient as a landmark
 

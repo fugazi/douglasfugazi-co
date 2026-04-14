@@ -1,7 +1,5 @@
 import { e2eNavigationRoutes } from '../../config/routes';
 import { test, expect } from '../../fixtures/test-fixtures';
-import { HomePage } from '../../page-objects/home.page';
-import { LayoutPage } from '../../page-objects/layout.page';
 
 /**
  * Builds a URL matcher tolerant to a trailing slash.
@@ -15,10 +13,7 @@ test.describe('Navigation journeys @e2e', () => {
   /**
    * Verifies sidebar navigation reaches each registered route.
    */
-  test('@e2e sidebar navigation reaches each route', async ({ page }) => {
-    const homePage = new HomePage(page);
-    const layoutPage = new LayoutPage(page);
-
+  test('@e2e sidebar navigation reaches each route', async ({ page, homePage, layoutPage }) => {
     await test.step('Open home route', async () => {
       await homePage.gotoHome();
       await homePage.expectLoaded();
@@ -36,9 +31,7 @@ test.describe('Navigation journeys @e2e', () => {
   /**
    * Verifies home CTAs point to valid destinations.
    */
-  test('@e2e home CTA links are configured', async ({ page }) => {
-    const homePage = new HomePage(page);
-
+  test('@e2e home CTA links are configured', async ({ homePage }) => {
     await test.step('Open home route', async () => {
       await homePage.gotoHome();
       await homePage.expectLoaded();

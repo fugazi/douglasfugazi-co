@@ -1,5 +1,4 @@
 import { test, expect } from '../../fixtures/test-fixtures';
-import { TalksPage } from '../../page-objects/talks.page';
 
 /**
  * Covers talks rendering and media links configuration.
@@ -8,9 +7,7 @@ test.describe('Talks page deep coverage @integration', () => {
   /**
    * Verifies years and talk cards are rendered.
    */
-  test('@integration talks page lists years and talk cards', async ({ page }) => {
-    const talksPage = new TalksPage(page);
-
+  test('@integration talks page lists years and talk cards', async ({ page, talksPage }) => {
     await test.step('Open talks page', async () => {
       await talksPage.gotoTalks();
       await expect(page).toHaveURL(/\/talks\/?$/);
@@ -26,9 +23,7 @@ test.describe('Talks page deep coverage @integration', () => {
   /**
    * Validates watch/slides links are properly configured.
    */
-  test('@integration talks media links are correctly configured', async ({ page }) => {
-    const talksPage = new TalksPage(page);
-
+  test('@integration talks media links are correctly configured', async ({ page, talksPage }) => {
     await test.step('Open talks page', async () => {
       await talksPage.gotoTalks();
       await expect(page).toHaveURL(/\/talks\/?$/);
