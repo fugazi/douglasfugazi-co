@@ -49,7 +49,7 @@ const {
 			<input id='my-drawer' type='checkbox' class='drawer-toggle' data-ui='drawer-toggle' />
 			<!-- Drawer content -->
             <div class='drawer-content bg-base-100'>
-				<header class='bg-base-100 z-50 text-base-content shadow-sm' data-ui='top-header'>
+				<header class='sticky top-0 z-50 border-b border-base-content/10 bg-base-100/95 text-base-content shadow-sm' data-ui='top-header'>
 					<nav
 						class='w-full px-3 py-3 sm:px-4 lg:px-6 lg:py-4'
 						aria-label='Top navigation'
@@ -77,8 +77,10 @@ const {
 									</p>
 								</div>
 							</div>
-							<label
-								for='my-drawer'
+							<button
+								type='button'
+								aria-controls='my-drawer'
+								aria-expanded='false'
 								class='btn btn-ghost btn-square btn-sm h-9 w-9 border border-success/35 bg-success/12 p-0 text-success shadow-[0_1px_0_rgba(16,185,129,0.22)] hover:bg-success/20 hover:text-success focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-success/40 focus-visible:ring-offset-1 focus-visible:ring-offset-base-100 lg:hidden'
 								aria-label='Open sidebar menu'
 								data-ui='drawer-open-button'
@@ -95,7 +97,7 @@ const {
 										stroke-linejoin='round'
 										d='M4 6.75h16M4 12h16m-16 5.25h16'></path>
 								</svg>
-							</label>
+							</button>
 						</div>
 						<div class='hidden lg:flex lg:items-center lg:justify-end' data-ui='desktop-theme-controls'>
 							<DarkLightController />
@@ -109,13 +111,95 @@ const {
 				</main>
 			</div>
 			<!-- Drawer side -->
-			<div class='drawer-side z-40' data-ui='drawer-side'>
+			<div class='drawer-side z-[70]' data-ui='drawer-side'>
 				<label for='my-drawer' aria-label='close sidebar' class='drawer-overlay bg-base-content/35 lg:bg-transparent'
 					data-ui='drawer-overlay'
 				></label>
 				<Navbar />
 			</div>
 		</div>
+		<script is:inline>
+			(() => {
+				const setupDrawerControls = () => {
+					if (typeof window === 'undefined') {
+						return
+					}
+
+					if (typeof window.__drawerMobileCleanup === 'function') {
+						window.__drawerMobileCleanup()
+					}
+
+					const drawerToggle = document.getElementById('my-drawer')
+					const openButton = document.querySelector('[data-ui="drawer-open-button"]')
+					const closeButton = document.querySelector('[data-ui="drawer-close-button"]')
+
+					if (!(drawerToggle instanceof HTMLInputElement)) {
+						return
+					}
+
+					const syncDrawerState = () => {
+						const isMobile = window.matchMedia('(max-width: 1023px)').matches
+						document.body.classList.toggle('mobile-drawer-open', isMobile && drawerToggle.checked)
+
+						if (openButton instanceof HTMLElement) {
+							openButton.setAttribute('aria-expanded', drawerToggle.checked ? 'true' : 'false')
+						}
+					}
+
+					const onToggleChange = () => syncDrawerState()
+					const onResize = () => syncDrawerState()
+
+					const onOpenClick = (event) => {
+						event.preventDefault()
+						drawerToggle.checked = true
+						syncDrawerState()
+					}
+
+					const onCloseClick = (event) => {
+						event.preventDefault()
+						drawerToggle.checked = false
+						syncDrawerState()
+						if (openButton instanceof HTMLElement) {
+							openButton.focus()
+						}
+					}
+
+					drawerToggle.addEventListener('change', onToggleChange)
+					window.addEventListener('resize', onResize, { passive: true })
+
+					if (openButton instanceof HTMLElement) {
+						openButton.addEventListener('click', onOpenClick)
+					}
+
+					if (closeButton instanceof HTMLElement) {
+						closeButton.addEventListener('click', onCloseClick)
+					}
+
+					syncDrawerState()
+
+					window.__drawerMobileCleanup = () => {
+						drawerToggle.removeEventListener('change', onToggleChange)
+						window.removeEventListener('resize', onResize)
+
+						if (openButton instanceof HTMLElement) {
+							openButton.removeEventListener('click', onOpenClick)
+						}
+
+						if (closeButton instanceof HTMLElement) {
+							closeButton.removeEventListener('click', onCloseClick)
+						}
+					}
+				}
+
+				if (document.readyState === 'loading') {
+					document.addEventListener('DOMContentLoaded', setupDrawerControls, { once: true })
+				} else {
+					setupDrawerControls()
+				}
+
+				document.addEventListener('astro:after-swap', setupDrawerControls)
+			})()
+		</script>
 	</body>
 </html>
 
@@ -130,5 +214,12 @@ const {
 		margin: 0;
 		width: 100%;
 		height: 100%;
+	}
+
+	@media (max-width: 1023px) {
+		body.mobile-drawer-open {
+			overflow: hidden;
+			overscroll-behavior: contain;
+		}
 	}
 </style>

@@ -35,15 +35,16 @@ const navItems = [
 const isActiveRoute = (href: string) => normalizePath(href) === currentPath
 ---
 <aside
-	class='h-screen w-[20rem] bg-base-200 text-base-content flex flex-col px-4 pb-5 pt-4'
+	class='h-[100dvh] max-h-[100dvh] w-[min(85vw,20rem)] lg:w-[20rem] bg-base-200 text-base-content flex flex-col px-4 pb-5 pt-4'
 	aria-label='Primary sidebar'
 	data-ui='sidebar'
 >
 	<div class='grid grid-cols-[auto_1fr_auto] items-center gap-2 border-b border-base-content/15 pb-2.5 lg:hidden' data-ui='sidebar-mobile-header'>
-		<label
-			for='my-drawer'
-			class='btn btn-ghost btn-square btn-sm h-10 w-10 rounded-xl border border-success/35 bg-success/12 text-success shadow-[0_1px_0_rgba(16,185,129,0.22)] hover:bg-success/20 hover:text-success focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-success/40 focus-visible:ring-offset-1 focus-visible:ring-offset-base-200'
+		<button
+			type='button'
+			aria-controls='my-drawer'
 			aria-label='Close sidebar menu'
+			class='btn btn-ghost btn-square btn-sm h-10 w-10 rounded-xl border border-success/35 bg-success/12 text-success shadow-[0_1px_0_rgba(16,185,129,0.22)] hover:bg-success/20 hover:text-success focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-success/40 focus-visible:ring-offset-1 focus-visible:ring-offset-base-200'
 			data-ui='drawer-close-button'
 		>
 			<svg
@@ -55,7 +56,7 @@ const isActiveRoute = (href: string) => normalizePath(href) === currentPath
 			>
 				<path stroke-linecap='round' stroke-linejoin='round' d='M15.75 19.5 8.25 12l7.5-7.5'></path>
 			</svg>
-		</label>
+		</button>
 		<div class='flex min-w-0 items-center gap-2.5 px-1' data-ui='sidebar-mobile-identity'>
 			<div class='size-10 shrink-0 rounded-full bg-[linear-gradient(135deg,#2af4ce_0%,#1de2bc_45%,#13c7a3_100%)] p-[2px]'>
 				<Image

@@ -105,6 +105,7 @@ test.describe('Mobile-specific interactions @visual', () => {
   test(`@visual mobile header and drawer show compact profile and close control`, async ({ page }) => {
     await page.goto('/');
 
+    const body = page.locator('body');
     const mobileTopBrand = page.locator('[data-ui="mobile-top-brand"]');
     const drawerButton = page.locator('[data-ui="drawer-open-button"]');
     const drawerToggle = page.locator('#my-drawer');
@@ -113,15 +114,22 @@ test.describe('Mobile-specific interactions @visual', () => {
 
     await expect(mobileTopBrand).toBeVisible();
     await expect(drawerButton).toBeVisible();
+    await expect(drawerButton).toHaveAttribute('aria-controls', 'my-drawer');
+    await expect(drawerButton).toHaveAttribute('aria-expanded', 'false');
     await expect(drawerToggle).not.toBeChecked();
+    await expect(body).not.toHaveClass(/(^|\s)mobile-drawer-open(\s|$)/);
 
     await drawerButton.click();
 
     await expect(drawerToggle).toBeChecked();
+    await expect(drawerButton).toHaveAttribute('aria-expanded', 'true');
+    await expect(body).toHaveClass(/(^|\s)mobile-drawer-open(\s|$)/);
     await expect(drawerCloseButton).toBeVisible();
     await expect(sidebarSocialLinks).toBeVisible();
 
     await drawerCloseButton.click();
     await expect(drawerToggle).not.toBeChecked();
+    await expect(drawerButton).toHaveAttribute('aria-expanded', 'false');
+    await expect(body).not.toHaveClass(/(^|\s)mobile-drawer-open(\s|$)/);
   });
 });
