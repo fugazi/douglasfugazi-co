@@ -424,12 +424,12 @@ const guidancePaths = [
       const allBtns = document.querySelectorAll<HTMLButtonElement>('.tab-btn');
       allBtns.forEach((b) => {
         b.classList.remove('bg-base-100', 'text-success', 'shadow-[0_2px_8px_rgba(0,0,0,0.06)]');
-        b.classList.add('text-base-content/70');
+        b.classList.add('text-base-content/70', 'hover:text-base-content', 'hover:bg-base-200/50');
         b.setAttribute('aria-selected', 'false');
       });
 
       targetBtn.classList.add('bg-base-100', 'text-success', 'shadow-[0_2px_8px_rgba(0,0,0,0.06)]');
-      targetBtn.classList.remove('text-base-content/70');
+      targetBtn.classList.remove('text-base-content/70', 'hover:text-base-content', 'hover:bg-base-200/50');
       targetBtn.setAttribute('aria-selected', 'true');
 
       tabPanels.forEach((panel) => {
