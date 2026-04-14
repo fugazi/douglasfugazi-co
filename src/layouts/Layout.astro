@@ -200,7 +200,17 @@ const {
 						}
 
 						if (drawerSide instanceof HTMLElement) {
-							drawerSide.setAttribute('aria-hidden', isDrawerOpen ? 'false' : 'true')
+							if (isMobile) {
+								drawerSide.setAttribute('aria-hidden', isDrawerOpen ? 'false' : 'true')
+								if (isDrawerOpen) {
+									drawerSide.removeAttribute('inert')
+								} else {
+									drawerSide.setAttribute('inert', '')
+								}
+							} else {
+								drawerSide.removeAttribute('aria-hidden')
+								drawerSide.removeAttribute('inert')
+							}
 						}
 
 						if (isDrawerOpen && !wasDrawerOpen) {
