@@ -23,19 +23,17 @@
 
 ## Tabla de Contenidos
 
-- [Resumen](#resumen)
 - [Características Principales](#características-principales)
 - [Stack Tecnológico](#stack-tecnológico)
 - [Arquitectura del Proyecto](#arquitectura-del-proyecto)
 - [Rutas de la Aplicación](#rutas-de-la-aplicación)
 - [Inicio Rápido](#inicio-rápido)
 - [Comandos Disponibles](#comandos-disponibles)
-- [Automatización QA con Playwright](#automatización-qa-con-playwright)
-- [Variables de Entorno](#variables-de-entorno)
+- [Test Automatizados con Playwright](#test-automatizados-con-playwright)
 - [CI/CD y Reportes](#cicd-y-reportes)
 - [Accesibilidad y Calidad UI](#accesibilidad-y-calidad-ui)
+- [Estado del Proyecto](#estado-del-proyecto)
 - [Tema Base y Personalización](#tema-base-y-personalización)
-- [Hoja de Ruta Sugerida](#hoja-de-ruta-sugerida)
 - [Contacto](#contacto)
 - [Licencia](#licencia)
 
@@ -108,7 +106,7 @@ Rutas principales disponibles:
 ### Instalación
 
 ```bash
-git clone https://github.com/fugazi/douglasfugazi-co.git
+git clone https://github.com/fugazi/douglasfugazi-co
 cd douglasfugazi-co
 pnpm install
 ```
@@ -235,6 +233,6 @@ Este proyecto está licenciado bajo la **Licencia MIT** - consulta el archivo [L
 [![Playwright](https://img.shields.io/badge/Playwright-2EAD33?style=flat&logo=playwright&logoColor=white)](https://playwright.dev)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 
-**[⭐ Dale una estrella en GitHub](https://github.com/fugazi/)** si este proyecto te resulta útil
+**[⭐ Dale una estrella en GitHub](https://github.com/fugazi/douglasfugazi-co)** si este proyecto te resulta útil
 
 </div>
