@@ -98,4 +98,30 @@ test.describe('Mobile-specific interactions @visual', () => {
     // Drawer side should be visible
     await expect(drawerSide).toBeVisible();
   });
+
+  /**
+   * Verifies the improved mobile header and drawer structure.
+   */
+  test(`@visual mobile header and drawer show compact profile and close control`, async ({ page }) => {
+    await page.goto('/');
+
+    const mobileTopBrand = page.locator('[data-ui="mobile-top-brand"]');
+    const drawerButton = page.locator('[data-ui="drawer-open-button"]');
+    const drawerToggle = page.locator('#my-drawer');
+    const drawerCloseButton = page.locator('[data-ui="drawer-close-button"]');
+    const sidebarSocialLinks = page.locator('[data-ui="sidebar-social-links"]');
+
+    await expect(mobileTopBrand).toBeVisible();
+    await expect(drawerButton).toBeVisible();
+    await expect(drawerToggle).not.toBeChecked();
+
+    await drawerButton.click();
+
+    await expect(drawerToggle).toBeChecked();
+    await expect(drawerCloseButton).toBeVisible();
+    await expect(sidebarSocialLinks).toBeVisible();
+
+    await drawerCloseButton.click();
+    await expect(drawerToggle).not.toBeChecked();
+  });
 });
