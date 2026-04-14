@@ -1,0 +1,67 @@
+version: 2
+
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'sunday'
+      time: '06:00'
+      timezone: 'America/Bogota'
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: 'chore'
+      include: 'scope'
+    labels:
+      - 'dependencies'
+      - 'npm'
+    ignore:
+      - dependency-name: 'astro'
+        update-types:
+          - 'version-update:semver-major'
+      - dependency-name: '@astrojs/*'
+        update-types:
+          - 'version-update:semver-major'
+      - dependency-name: 'tailwindcss'
+        update-types:
+          - 'version-update:semver-major'
+      - dependency-name: '@tailwindcss/*'
+        update-types:
+          - 'version-update:semver-major'
+      - dependency-name: 'daisyui'
+        update-types:
+          - 'version-update:semver-major'
+      - dependency-name: 'eslint'
+        update-types:
+          - 'version-update:semver-major'
+      - dependency-name: '@typescript-eslint/*'
+        update-types:
+          - 'version-update:semver-major'
+
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'sunday'
+      time: '06:30'
+      timezone: 'America/Bogota'
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: 'ci'
+      include: 'scope'
+    labels:
+      - 'dependencies'
+      - 'github-actions'
+    ignore:
+      - dependency-name: 'actions/checkout'
+        update-types:
+          - 'version-update:semver-major'
+      - dependency-name: 'actions/setup-node'
+        update-types:
+          - 'version-update:semver-major'
+      - dependency-name: 'actions/upload-artifact'
+        update-types:
+          - 'version-update:semver-major'
+      - dependency-name: 'pnpm/action-setup'
+        update-types:
+          - 'version-update:semver-major'
