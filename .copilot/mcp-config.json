@@ -1,13 +1,20 @@
 {
   "mcpServers": {
-    "EXAMPLE-github": {
+    "playwright": {
       "command": "npx",
       "args": [
         "-y",
-        "@anthropic/github-mcp-server"
+        "@playwright/mcp@latest"
+      ]
+    },
+    "github": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-github"
       ],
       "env": {
-        "GITHUB_TOKEN": "${GITHUB_TOKEN}"
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}"
       }
     }
   }
