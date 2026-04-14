@@ -108,7 +108,7 @@ Rutas principales disponibles:
 ### Instalación
 
 ```bash
-git clone https://github.com/douglasfugazi/douglasfugazi-co.git
+git clone https://github.com/fugazi/douglasfugazi-co.git
 cd douglasfugazi-co
 pnpm install
 ```
