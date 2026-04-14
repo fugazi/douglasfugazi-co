@@ -74,7 +74,7 @@ const isActiveRoute = (href: string) => normalizePath(href) === currentPath
 		<div class='w-10' aria-hidden='true'></div>
 	</div>
 
-	<div class='flex h-full flex-col justify-between py-4 lg:my-8'>
+	<div class='flex h-full flex-col py-4 lg:my-8 lg:justify-between'>
 		<div>
 			<div class='hidden flex-col items-center lg:flex' data-ui='sidebar-profile'>
 				<div class='size-44 rounded-full bg-[linear-gradient(135deg,#2af4ce_0%,#1de2bc_45%,#13c7a3_100%)] p-[3px] shadow-[0_0_1px_11px_rgba(29,226,188,0.2)]'>
@@ -124,7 +124,7 @@ const isActiveRoute = (href: string) => normalizePath(href) === currentPath
 			</div>
 		</div>
 
-		<div class='mx-3 border-t border-base-content/15 pt-3.5 lg:mx-4 lg:pt-4' data-ui='sidebar-social-container'>
+		<div class='mx-3 mt-9 border-t border-base-content/15 pt-3.5 max-[360px]:mt-8 lg:mx-4 lg:mt-0 lg:pt-4' data-ui='sidebar-social-container'>
 			<SocialIcons compact noWrap context='sidebar' />
 		</div>
 	</div>

@@ -132,18 +132,95 @@ const {
 					const drawerToggle = document.getElementById('my-drawer')
 					const openButton = document.querySelector('[data-ui="drawer-open-button"]')
 					const closeButton = document.querySelector('[data-ui="drawer-close-button"]')
+					const drawerSide = document.querySelector('[data-ui="drawer-side"]')
 
 					if (!(drawerToggle instanceof HTMLInputElement)) {
 						return
 					}
 
-					const syncDrawerState = () => {
+					let wasDrawerOpen = false
+					let focusBeforeOpen = null
+
+					const getFocusableElements = () => {
+						if (!(drawerSide instanceof HTMLElement)) {
+							return []
+						}
+
+						const selector = [
+							'a[href]',
+							'button:not([disabled])',
+							'input:not([disabled]):not([type="hidden"])',
+							'select:not([disabled])',
+							'textarea:not([disabled])',
+							'[tabindex]:not([tabindex="-1"])',
+						].join(',')
+
+						return Array.from(drawerSide.querySelectorAll(selector)).filter((node) => {
+							if (!(node instanceof HTMLElement)) {
+								return false
+							}
+
+							if (node.getAttribute('aria-hidden') === 'true') {
+								return false
+							}
+
+							const style = window.getComputedStyle(node)
+							return style.display !== 'none' && style.visibility !== 'hidden'
+						})
+					}
+
+					const focusDrawerPrimaryControl = () => {
+						if (closeButton instanceof HTMLElement) {
+							closeButton.focus()
+							return
+						}
+
+						const [firstFocusable] = getFocusableElements()
+						if (firstFocusable instanceof HTMLElement) {
+							firstFocusable.focus()
+						}
+					}
+
+					const closeDrawer = (restoreFocusOnClose = true) => {
+						if (!drawerToggle.checked) {
+							return
+						}
+
+						drawerToggle.checked = false
+						syncDrawerState(restoreFocusOnClose)
+					}
+
+					const syncDrawerState = (restoreFocusOnClose = true) => {
 						const isMobile = window.matchMedia('(max-width: 1023px)').matches
-						document.body.classList.toggle('mobile-drawer-open', isMobile && drawerToggle.checked)
+						const isDrawerOpen = isMobile && drawerToggle.checked
+						document.body.classList.toggle('mobile-drawer-open', isDrawerOpen)
 
 						if (openButton instanceof HTMLElement) {
-							openButton.setAttribute('aria-expanded', drawerToggle.checked ? 'true' : 'false')
+							openButton.setAttribute('aria-expanded', isDrawerOpen ? 'true' : 'false')
 						}
+
+						if (drawerSide instanceof HTMLElement) {
+							drawerSide.setAttribute('aria-hidden', isDrawerOpen ? 'false' : 'true')
+						}
+
+						if (isDrawerOpen && !wasDrawerOpen) {
+							const activeElement = document.activeElement
+							focusBeforeOpen = activeElement instanceof HTMLElement ? activeElement : null
+							requestAnimationFrame(() => {
+								focusDrawerPrimaryControl()
+							})
+						}
+
+						if (!isDrawerOpen && wasDrawerOpen && restoreFocusOnClose) {
+							if (openButton instanceof HTMLElement) {
+								openButton.focus()
+							} else if (focusBeforeOpen instanceof HTMLElement) {
+								focusBeforeOpen.focus()
+							}
+							focusBeforeOpen = null
+						}
+
+						wasDrawerOpen = isDrawerOpen
 					}
 
 					const onToggleChange = () => syncDrawerState()
@@ -157,15 +234,55 @@ const {
 
 					const onCloseClick = (event) => {
 						event.preventDefault()
-						drawerToggle.checked = false
-						syncDrawerState()
-						if (openButton instanceof HTMLElement) {
-							openButton.focus()
+						closeDrawer(true)
+					}
+
+					const onDocumentKeyDown = (event) => {
+						const isMobile = window.matchMedia('(max-width: 1023px)').matches
+						if (!isMobile || !drawerToggle.checked) {
+							return
+						}
+
+						if (event.key === 'Escape') {
+							event.preventDefault()
+							closeDrawer(true)
+							return
+						}
+
+						if (event.key !== 'Tab') {
+							return
+						}
+
+						const focusable = getFocusableElements()
+						if (focusable.length === 0) {
+							event.preventDefault()
+							return
+						}
+
+						const first = focusable[0]
+						const last = focusable[focusable.length - 1]
+						const activeElement = document.activeElement
+
+						if (!(activeElement instanceof HTMLElement) || !(drawerSide instanceof HTMLElement) || !drawerSide.contains(activeElement)) {
+							event.preventDefault()
+							first.focus()
+							return
+						}
+
+						if (event.shiftKey && activeElement === first) {
+							event.preventDefault()
+							last.focus()
+						}
+
+						if (!event.shiftKey && activeElement === last) {
+							event.preventDefault()
+							first.focus()
 						}
 					}
 
 					drawerToggle.addEventListener('change', onToggleChange)
 					window.addEventListener('resize', onResize, { passive: true })
+					document.addEventListener('keydown', onDocumentKeyDown)
 
 					if (openButton instanceof HTMLElement) {
 						openButton.addEventListener('click', onOpenClick)
@@ -180,6 +297,7 @@ const {
 					window.__drawerMobileCleanup = () => {
 						drawerToggle.removeEventListener('change', onToggleChange)
 						window.removeEventListener('resize', onResize)
+						document.removeEventListener('keydown', onDocumentKeyDown)
 
 						if (openButton instanceof HTMLElement) {
 							openButton.removeEventListener('click', onOpenClick)

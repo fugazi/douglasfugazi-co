@@ -133,4 +133,42 @@ test.describe('Mobile-specific interactions @visual', () => {
     await expect(drawerButton).toHaveAttribute('aria-expanded', 'false');
     await expect(body).not.toHaveClass(/(^|\s)mobile-drawer-open(\s|$)/);
   });
+
+  /**
+   * Verifies keyboard focus trapping and Escape close behavior.
+   */
+  test(`@visual mobile drawer traps focus and closes with Escape`, async ({ page }) => {
+    await page.goto('/');
+
+    const drawerButton = page.locator('[data-ui="drawer-open-button"]');
+    const drawerToggle = page.locator('#my-drawer');
+    const drawerCloseButton = page.locator('[data-ui="drawer-close-button"]');
+
+    await expect(drawerButton).toBeVisible();
+    await expect(drawerToggle).not.toBeChecked();
+
+    await drawerButton.click();
+
+    await expect(drawerToggle).toBeChecked();
+    await expect(drawerCloseButton).toBeFocused();
+
+    // Cycle through focusable elements and verify focus remains trapped inside drawer.
+    for (let i = 0; i < 10; i++) {
+      await page.keyboard.press('Tab');
+    }
+
+    const activeElementInsideDrawer = await page.evaluate(() => {
+      const drawerSide = document.querySelector('[data-ui="drawer-side"]');
+      const active = document.activeElement;
+      return Boolean(drawerSide && active && drawerSide.contains(active));
+    });
+
+    expect(activeElementInsideDrawer).toBeTruthy();
+
+    await page.keyboard.press('Escape');
+
+    await expect(drawerToggle).not.toBeChecked();
+    await expect(drawerButton).toBeFocused();
+    await expect(drawerButton).toHaveAttribute('aria-expanded', 'false');
+  });
 });
