@@ -65,6 +65,27 @@ test.describe('Responsive design @visual', () => {
           const drawerButton = page.locator('[data-ui="drawer-open-button"]');
           await expect(drawerButton).toBeVisible();
         });
+
+        /**
+         * Validates CTA card content is not cut off on mobile.
+         */
+        test(`@visual CTA card is fully visible without overflow on ${viewport.name}`, async ({
+          page,
+        }) => {
+          const homePage = new HomePage(page);
+
+          await homePage.gotoHome();
+          await homePage.expectLoaded();
+
+          await expect(homePage.contactSection).toBeVisible();
+          await expect(homePage.emailCta).toBeVisible();
+          await expect(homePage.linkedInCta).toBeVisible();
+
+          const hasHorizontalOverflow = await page.evaluate(() => {
+            return document.body.scrollWidth > document.body.clientWidth;
+          });
+          expect(hasHorizontalOverflow).toBe(false);
+        });
       }
     });
   }
@@ -103,7 +124,9 @@ test.describe('Mobile-specific interactions @visual', () => {
   /**
    * Verifies the improved mobile header and drawer structure.
    */
-  test(`@visual mobile header and drawer show compact profile and close control`, async ({ page }) => {
+  test(`@visual mobile header and drawer show compact profile and close control`, async ({
+    page,
+  }) => {
     await page.goto('/');
 
     const body = page.locator('body');
