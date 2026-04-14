@@ -1,7 +1,4 @@
 import { test, expect } from '../../fixtures/test-fixtures';
-import { HomePage } from '../../page-objects/home.page';
-import { AboutPage } from '../../page-objects/about.page';
-import { ContactPage } from '../../page-objects/contact.page';
 
 /**
  * Validates availability and format of social links on key pages.
@@ -10,9 +7,7 @@ test.describe('Social icons links @integration', () => {
   /**
    * Checks social CTAs visible on home.
    */
-  test('@integration social icons are present on home page', async ({ page }) => {
-    const homePage = new HomePage(page);
-
+  test('@integration social icons are present on home page', async ({ homePage }) => {
     await homePage.gotoHome();
     await homePage.expectLoaded();
 
@@ -25,9 +20,7 @@ test.describe('Social icons links @integration', () => {
   /**
    * Checks social CTAs visible on about.
    */
-  test('@integration social icons are present on about page', async ({ page }) => {
-    const aboutPage = new AboutPage(page);
-
+  test('@integration social icons are present on about page', async ({ aboutPage }) => {
     await aboutPage.gotoAbout();
     await aboutPage.expectLoaded();
 
@@ -40,9 +33,7 @@ test.describe('Social icons links @integration', () => {
   /**
    * Checks social CTAs visible on contact.
    */
-  test('@integration social icons are present on contact page', async ({ page }) => {
-    const contactPage = new ContactPage(page);
-
+  test('@integration social icons are present on contact page', async ({ contactPage }) => {
     await contactPage.gotoContact();
     await contactPage.expectLoaded();
 
@@ -55,9 +46,7 @@ test.describe('Social icons links @integration', () => {
   /**
    * Verifies email links use the mailto scheme.
    */
-  test('@integration email links have proper mailto format', async ({ page }) => {
-    const homePage = new HomePage(page);
-
+  test('@integration email links have proper mailto format', async ({ page, homePage }) => {
     await homePage.gotoHome();
     await homePage.expectLoaded();
 
@@ -75,9 +64,7 @@ test.describe('Social icons links @integration', () => {
   /**
    * Verifies LinkedIn links target the expected domain.
    */
-  test('@integration LinkedIn links point to correct domain', async ({ page }) => {
-    const homePage = new HomePage(page);
-
+  test('@integration LinkedIn links point to correct domain', async ({ page, homePage }) => {
     await homePage.gotoHome();
     await homePage.expectLoaded();
 

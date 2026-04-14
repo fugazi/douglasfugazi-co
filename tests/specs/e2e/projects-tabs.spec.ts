@@ -1,5 +1,5 @@
 import { test, expect } from '../../fixtures/test-fixtures';
-import { ProjectsPage, projectsTabs } from '../../page-objects/projects.page';
+import { projectsTabs } from '../../page-objects/projects.page';
 
 /**
  * Validates tab interactions on the projects page.
@@ -8,9 +8,7 @@ test.describe('Projects interactions @e2e', () => {
   /**
    * Iterates all tabs and confirms active state and visible panel.
    */
-  test('@e2e users can switch project category tabs', async ({ page }) => {
-    const projectsPage = new ProjectsPage(page);
-
+  test('@e2e users can switch project category tabs', async ({ page, projectsPage }) => {
     await test.step('Open projects page', async () => {
       await projectsPage.gotoProjects();
       await projectsPage.expectLoaded();

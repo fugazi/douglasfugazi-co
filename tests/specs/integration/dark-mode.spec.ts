@@ -1,6 +1,4 @@
 import { test, expect } from '../../fixtures/test-fixtures';
-import { HomePage } from '../../page-objects/home.page';
-import { ThemePage } from '../../page-objects/theme.page';
 
 /**
  * Validates functional and accessible behavior of the theme toggle.
@@ -9,10 +7,11 @@ test.describe('Dark mode toggle @integration', () => {
   /**
    * Confirms the toggle is available on all key pages.
    */
-  test('@integration theme toggle is visible on all pages', async ({ page }) => {
-    const themePage = new ThemePage(page);
-    const homePage = new HomePage(page);
-
+  test('@integration theme toggle is visible on all pages', async ({
+    page,
+    homePage,
+    themePage,
+  }) => {
     await test.step('Open home and validate theme toggle', async () => {
       await homePage.gotoHome();
       await homePage.expectLoaded();
@@ -35,10 +34,10 @@ test.describe('Dark mode toggle @integration', () => {
   /**
    * Verifies that theme state changes after interaction.
    */
-  test('@integration user can toggle between light and dark themes', async ({ page }) => {
-    const themePage = new ThemePage(page);
-    const homePage = new HomePage(page);
-
+  test('@integration user can toggle between light and dark themes', async ({
+    homePage,
+    themePage,
+  }) => {
     await test.step('Open home and capture current state', async () => {
       await homePage.gotoHome();
       await homePage.expectLoaded();
@@ -56,10 +55,7 @@ test.describe('Dark mode toggle @integration', () => {
   /**
    * Checks that the toggle can be switched on and off.
    */
-  test('@integration theme toggle is clickable', async ({ page }) => {
-    const themePage = new ThemePage(page);
-    const homePage = new HomePage(page);
-
+  test('@integration theme toggle is clickable', async ({ homePage, themePage }) => {
     await test.step('Open home page', async () => {
       await homePage.gotoHome();
       await homePage.expectLoaded();
@@ -82,10 +78,7 @@ test.describe('Dark mode toggle @integration', () => {
   /**
    * Validates essential ARIA attributes of the theme control.
    */
-  test('@integration theme toggle has proper ARIA attributes', async ({ page }) => {
-    const themePage = new ThemePage(page);
-    const homePage = new HomePage(page);
-
+  test('@integration theme toggle has proper ARIA attributes', async ({ homePage, themePage }) => {
     await test.step('Open home page', async () => {
       await homePage.gotoHome();
       await homePage.expectLoaded();

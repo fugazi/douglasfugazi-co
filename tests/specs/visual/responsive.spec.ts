@@ -1,6 +1,4 @@
 import { test, expect } from '../../fixtures/test-fixtures';
-import { HomePage } from '../../page-objects/home.page';
-import { LayoutPage } from '../../page-objects/layout.page';
 
 type Viewport = {
   name: string;
@@ -29,10 +27,10 @@ test.describe('Responsive design @visual', () => {
       /**
        * Checks home and core layout in the current viewport.
        */
-      test(`@visual home page renders correctly on ${viewport.name}`, async ({ page }) => {
-        const homePage = new HomePage(page);
-        const layoutPage = new LayoutPage(page);
-
+      test(`@visual home page renders correctly on ${viewport.name}`, async ({
+        homePage,
+        layoutPage,
+      }) => {
         await homePage.gotoHome();
         await homePage.expectLoaded();
         await layoutPage.expectCoreLayout();
@@ -42,9 +40,7 @@ test.describe('Responsive design @visual', () => {
       /**
        * Ensures footer visibility at each resolution.
        */
-      test(`@visual footer is visible on ${viewport.name}`, async ({ page }) => {
-        const homePage = new HomePage(page);
-
+      test(`@visual footer is visible on ${viewport.name}`, async ({ page, homePage }) => {
         await homePage.gotoHome();
         await homePage.expectLoaded();
 
@@ -56,9 +52,10 @@ test.describe('Responsive design @visual', () => {
         /**
          * Validates drawer button presence on mobile.
          */
-        test(`@visual mobile drawer button is visible on ${viewport.name}`, async ({ page }) => {
-          const homePage = new HomePage(page);
-
+        test(`@visual mobile drawer button is visible on ${viewport.name}`, async ({
+          page,
+          homePage,
+        }) => {
           await homePage.gotoHome();
           await homePage.expectLoaded();
 
@@ -71,9 +68,8 @@ test.describe('Responsive design @visual', () => {
          */
         test(`@visual CTA card is fully visible without overflow on ${viewport.name}`, async ({
           page,
+          homePage,
         }) => {
-          const homePage = new HomePage(page);
-
           await homePage.gotoHome();
           await homePage.expectLoaded();
 

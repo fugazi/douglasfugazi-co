@@ -1,5 +1,4 @@
 import { test, expect } from '../../fixtures/test-fixtures';
-import { MusicPage } from '../../page-objects/music.page';
 
 /**
  * Covers structure, links, and embeds on the music page.
@@ -8,9 +7,10 @@ test.describe('Music page deep coverage @integration', () => {
   /**
    * Validates loading of key sections and profile reference link.
    */
-  test('@integration music page loads with key sections and profile link', async ({ page }) => {
-    const musicPage = new MusicPage(page);
-
+  test('@integration music page loads with key sections and profile link', async ({
+    page,
+    musicPage,
+  }) => {
     await test.step('Open music page', async () => {
       await musicPage.gotoMusic();
       await expect(page).toHaveURL(/\/music\/?$/);
@@ -26,9 +26,10 @@ test.describe('Music page deep coverage @integration', () => {
   /**
    * Verifies count and configuration of platform links.
    */
-  test('@integration music streaming links are correctly configured', async ({ page }) => {
-    const musicPage = new MusicPage(page);
-
+  test('@integration music streaming links are correctly configured', async ({
+    page,
+    musicPage,
+  }) => {
     await test.step('Open music page', async () => {
       await musicPage.gotoMusic();
       await expect(page).toHaveURL(/\/music\/?$/);
@@ -43,9 +44,7 @@ test.describe('Music page deep coverage @integration', () => {
   /**
    * Confirms presence and source of embedded iframes.
    */
-  test('@integration music embeds are present and configured', async ({ page }) => {
-    const musicPage = new MusicPage(page);
-
+  test('@integration music embeds are present and configured', async ({ page, musicPage }) => {
     await test.step('Open music page', async () => {
       await musicPage.gotoMusic();
       await expect(page).toHaveURL(/\/music\/?$/);
