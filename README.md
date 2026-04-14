@@ -15,6 +15,7 @@
     <a href="https://playwright.dev/"><img src="https://img.shields.io/badge/Playwright-1.59.1-2EAD33?style=for-the-badge&logo=playwright&logoColor=white" alt="Playwright" /></a>
     <a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/Tailwind_CSS-3.4.19-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind CSS" /></a>
     <a href="https://pnpm.io/"><img src="https://img.shields.io/badge/pnpm-10.33.0-F69220?style=for-the-badge&logo=pnpm&logoColor=white" alt="pnpm" /></a>
+    <a href="https://app.netlify.com/projects/douglasfugazi-co/deploys"><img src="https://img.shields.io/badge/Netlify-Hosted-00C7B7?style=for-the-badge&logo=netlify&logoColor=white" alt="Netlify Hosted" /></a>
     <a href="./LICENSE"><img src="https://img.shields.io/badge/Licencia-MIT-1f6feb?style=for-the-badge" alt="Licencia MIT" /></a>
   </p>
 </div>
@@ -197,7 +198,7 @@ El proyecto incorpora prácticas de accesibilidad desde su base:
 | Métrica           |                                                  Estado                                                  | Descripción            |
 | :---------------- | :------------------------------------------------------------------------------------------------------: | :--------------------- |
 | **Tests**         | [![195 tests passing](https://img.shields.io/badge/tests-195%20passing-brightgreen)](#-suite-de-testing) | Suite completa E2E     |
-| **Build**         |               [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](#)               | Construcción exitosa   |
+| **Build**         | [![Netlify Status](https://api.netlify.com/api/v1/badges/7fa1677c-53b3-4573-a32c-62b26901dbd5/deploy-status)](https://app.netlify.com/projects/douglasfugazi-co/deploys) | Deploy en Netlify      |
 | **Coverage**      |      [![100% functional](https://img.shields.io/badge/coverage-100%25%20functional-brightgreen)](#)      | Cobertura funcional    |
 | **Performance**   |               [![A+ Grade](https://img.shields.io/badge/performance-A%2B-brightgreen)](#)                | Optimización web       |
 | **Accessibility** |            [![WCAG 2.1 AA](https://img.shields.io/badge/a11y-WCAG%202.1%20AA-brightgreen)](#)            | Accesibilidad completa |
@@ -232,6 +233,7 @@ Este proyecto está licenciado bajo la **Licencia MIT** - consulta el archivo [L
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)](https://typescriptlang.org)
 [![Playwright](https://img.shields.io/badge/Playwright-2EAD33?style=flat&logo=playwright&logoColor=white)](https://playwright.dev)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![Netlify Success](https://img.shields.io/badge/Netlify-success-00C7B7?style=flat&logo=netlify&logoColor=white)](https://app.netlify.com/projects/douglasfugazi-co/deploys)
 
 **[⭐ Dale una estrella en GitHub](https://github.com/fugazi/douglasfugazi-co)** si este proyecto te resulta útil
 
