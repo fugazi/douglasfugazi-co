@@ -7,9 +7,9 @@
       "computedHash": "14629b92a76d85a9074a887f1930041e1ce268d5f80e40c0659066fd04c19a35"
     },
     "playwright-cli": {
-      "source": "fugazi/test-automation-skills-agents",
+      "source": "microsoft/playwright-cli",
       "sourceType": "github",
-      "computedHash": "b59ec572042f6191e62c2fcf11623846769bfdf26582540daf0ddd69bf401be3"
+      "computedHash": "f75195249064c00f8cc69f8df10b947ea09196a78b784c1356dd032e1bf67a36"
     },
     "playwright-e2e-testing": {
       "source": "fugazi/test-automation-skills-agents",
