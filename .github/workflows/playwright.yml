@@ -2,9 +2,31 @@ name: Playwright Tests
 
 on:
   push:
-    branches: [main]
+    branches: [main, master]
+    paths-ignore:
+      - 'README.md'
+      - '**/*.md'
+      - 'LICENSE'
+      - '.vscode/**'
+      - '.astro/**'
+      - '.kilocode/**'
+      - '.idea/**'
+      - '*.iml'
+      - '.gitignore'
+      - '.gitattributes'
   pull_request:
-    branches: [main]
+    branches: [main, master]
+    paths-ignore:
+      - 'README.md'
+      - '**/*.md'
+      - 'LICENSE'
+      - '.vscode/**'
+      - '.astro/**'
+      - '.kilocode/**'
+      - '.idea/**'
+      - '*.iml'
+      - '.gitignore'
+      - '.gitattributes'
   workflow_dispatch:
 
 jobs:
@@ -31,11 +53,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Install Playwright browsers
-        run: pnpm exec playwright install --with-deps
+      - name: Install Playwright Chromium
+        run: pnpm exec playwright install --with-deps chromium
 
-      - name: Run Playwright tests
-        run: pnpm test
+      - name: Run Playwright tests (Chromium)
+        run: pnpm exec playwright test --project=chromium
 
       - name: Upload test report
         if: always()

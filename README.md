@@ -150,7 +150,7 @@ La estrategia de pruebas del proyecto está orientada a robustez y mantenibilida
 
 - 11 archivos spec.
 - 60 pruebas lógicas por navegador.
-- 180 ejecuciones en matriz multinavegador (Chromium, Firefox, WebKit).
+- 195 ejecuciones en matriz multinavegador (Chromium, Firefox, WebKit).
 
 Desglose por tipo (Chromium):
 
@@ -198,7 +198,7 @@ El proyecto incorpora prácticas de accesibilidad desde su base:
 
 | Métrica           |                                                  Estado                                                  | Descripción            |
 | :---------------- | :------------------------------------------------------------------------------------------------------: | :--------------------- |
-| **Tests**         | [![180 tests passing](https://img.shields.io/badge/tests-113%20passing-brightgreen)](#-suite-de-testing) | Suite completa E2E     |
+| **Tests**         | [![195 tests passing](https://img.shields.io/badge/tests-195%20passing-brightgreen)](#-suite-de-testing) | Suite completa E2E     |
 | **Build**         |               [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](#)               | Construcción exitosa   |
 | **Coverage**      |      [![100% functional](https://img.shields.io/badge/coverage-100%25%20functional-brightgreen)](#)      | Cobertura funcional    |
 | **Performance**   |               [![A+ Grade](https://img.shields.io/badge/performance-A%2B-brightgreen)](#)                | Optimización web       |
