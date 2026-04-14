@@ -4,7 +4,6 @@ import { ClientRouter } from 'astro:transitions';
 
 import ProfilePicture from '../assets/Douglas_2026.jpg';
 import Head from '../components/Head.astro';
-import BetterIcon from '../components/ui/BetterIcon.astro';
 import DarkLightController from '../components/ui/DarkLightController.astro';
 import Navbar from '../components/ui/Navbar.astro';
 
@@ -80,24 +79,22 @@ const {
 							</div>
 							<label
 								for='my-drawer'
-								class='btn btn-ghost btn-square btn-sm h-9 w-9 border border-base-content/10 bg-base-100/80 p-0 hover:bg-base-100 lg:hidden'
+								class='btn btn-ghost btn-square btn-sm h-9 w-9 border border-success/35 bg-success/12 p-0 text-success shadow-[0_1px_0_rgba(16,185,129,0.22)] hover:bg-success/20 hover:text-success focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-success/40 focus-visible:ring-offset-1 focus-visible:ring-offset-base-100 lg:hidden'
 								aria-label='Open sidebar menu'
 								data-ui='drawer-open-button'
 							>
-								<BetterIcon size='sm' class='rounded-lg bg-primary/18'>
-									<svg
-										xmlns='http://www.w3.org/2000/svg'
-										fill='none'
-										viewBox='0 0 24 24'
-										stroke-width='1.8'
-										class='size-5 stroke-current'
-									>
-										<path
-											stroke-linecap='round'
-											stroke-linejoin='round'
-											d='M4 6.75h16M4 12h16m-16 5.25h16'></path>
-									</svg>
-								</BetterIcon>
+								<svg
+									xmlns='http://www.w3.org/2000/svg'
+									fill='none'
+									viewBox='0 0 24 24'
+									stroke-width='1.9'
+									class='size-4.5 stroke-current'
+								>
+									<path
+										stroke-linecap='round'
+										stroke-linejoin='round'
+										d='M4 6.75h16M4 12h16m-16 5.25h16'></path>
+								</svg>
 							</label>
 						</div>
 						<div class='hidden lg:flex lg:items-center lg:justify-end' data-ui='desktop-theme-controls'>
