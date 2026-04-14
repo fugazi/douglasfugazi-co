@@ -56,11 +56,11 @@ const {
 						data-ui='top-nav'
 					>
 						<div
-							class='flex items-center justify-between gap-2.5 rounded-xl border border-base-content/10 bg-base-200/70 px-2.5 py-2 lg:hidden'
+							class='flex items-center justify-between gap-2.5 rounded-xl border border-base-content/10 bg-base-200/70 px-2.5 py-2 max-[360px]:gap-1.5 max-[360px]:px-2 max-[360px]:py-1.5 lg:hidden'
 							data-ui='mobile-top-brand'
 						>
 							<div class='flex min-w-0 items-center gap-2'>
-								<div class='size-11 shrink-0 rounded-full bg-[linear-gradient(135deg,#2af4ce_0%,#1de2bc_45%,#13c7a3_100%)] p-[2px]'>
+								<div class='size-11 shrink-0 rounded-full bg-[linear-gradient(135deg,#2af4ce_0%,#1de2bc_45%,#13c7a3_100%)] p-[2px] max-[360px]:size-10' data-ui='mobile-top-avatar-frame'>
 									<Image
 										src={ProfilePicture}
 										alt={`Profile picture of ${profile.fullName}`}
@@ -69,10 +69,10 @@ const {
 									/>
 								</div>
 								<div class='min-w-0 leading-tight'>
-									<p class='truncate text-[0.91rem] font-semibold text-base-content'>
+									<p class='truncate text-[0.91rem] font-semibold text-base-content max-[360px]:text-[0.83rem]'>
 										{profile.fullName}
 									</p>
-									<p class='truncate text-[0.68rem] font-medium tracking-[0.03em] text-base-content/70'>
+									<p class='truncate text-[0.68rem] font-medium tracking-[0.03em] text-base-content/70 max-[360px]:text-[0.62rem]'>
 										Senior QA Automation Engineer
 									</p>
 								</div>
@@ -217,6 +217,12 @@ const {
 	}
 
 	@media (max-width: 1023px) {
+		[data-ui='top-nav'] {
+			padding-top: max(0.75rem, env(safe-area-inset-top));
+			padding-left: max(0.75rem, env(safe-area-inset-left));
+			padding-right: max(0.75rem, env(safe-area-inset-right));
+		}
+
 		body.mobile-drawer-open {
 			overflow: hidden;
 			overscroll-behavior: contain;

@@ -44,7 +44,7 @@ const isActiveRoute = (href: string) => normalizePath(href) === currentPath
 			type='button'
 			aria-controls='my-drawer'
 			aria-label='Close sidebar menu'
-			class='btn btn-ghost btn-square btn-sm h-10 w-10 rounded-xl border border-success/35 bg-success/12 text-success shadow-[0_1px_0_rgba(16,185,129,0.22)] hover:bg-success/20 hover:text-success focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-success/40 focus-visible:ring-offset-1 focus-visible:ring-offset-base-200'
+			class='btn btn-ghost btn-square btn-sm h-10 w-10 rounded-xl border border-success/35 bg-success/12 text-success shadow-[0_1px_0_rgba(16,185,129,0.22)] hover:bg-success/20 hover:text-success focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-success/40 focus-visible:ring-offset-1 focus-visible:ring-offset-base-200 max-[360px]:h-9 max-[360px]:w-9'
 			data-ui='drawer-close-button'
 		>
 			<svg
@@ -57,8 +57,8 @@ const isActiveRoute = (href: string) => normalizePath(href) === currentPath
 				<path stroke-linecap='round' stroke-linejoin='round' d='M15.75 19.5 8.25 12l7.5-7.5'></path>
 			</svg>
 		</button>
-		<div class='flex min-w-0 items-center gap-2.5 px-1' data-ui='sidebar-mobile-identity'>
-			<div class='size-10 shrink-0 rounded-full bg-[linear-gradient(135deg,#2af4ce_0%,#1de2bc_45%,#13c7a3_100%)] p-[2px]'>
+		<div class='flex min-w-0 items-center gap-2.5 px-1 max-[360px]:gap-2 max-[360px]:px-0.5' data-ui='sidebar-mobile-identity'>
+			<div class='size-10 shrink-0 rounded-full bg-[linear-gradient(135deg,#2af4ce_0%,#1de2bc_45%,#13c7a3_100%)] p-[2px] max-[360px]:size-9'>
 				<Image
 					class='navbar-image-static size-full rounded-full object-cover object-[center_20%]'
 					src={ProfilePictures}
@@ -67,8 +67,8 @@ const isActiveRoute = (href: string) => normalizePath(href) === currentPath
 				/>
 			</div>
 			<div class='min-w-0 leading-tight'>
-				<p class='truncate text-[0.88rem] font-semibold text-base-content'>{fullName}</p>
-				<p class='truncate text-[0.66rem] font-medium tracking-[0.04em] text-base-content/65'>Senior QA Automation Engineer</p>
+				<p class='truncate text-[0.88rem] font-semibold text-base-content max-[360px]:text-[0.81rem]'>{fullName}</p>
+				<p class='truncate text-[0.66rem] font-medium tracking-[0.04em] text-base-content/65 max-[360px]:text-[0.6rem]'>Senior QA Automation Engineer</p>
 			</div>
 		</div>
 		<div class='w-10' aria-hidden='true'></div>
@@ -95,7 +95,7 @@ const isActiveRoute = (href: string) => normalizePath(href) === currentPath
 				</div>
 			</div>
 
-			<div class='mx-auto mt-4 w-full max-w-[15rem] lg:mt-12 lg:max-w-[14.5rem]'>
+			<div class='mx-auto mt-4 w-full max-w-[15rem] max-[360px]:mt-3 max-[360px]:max-w-[14.25rem] lg:mt-12 lg:max-w-[14.5rem]'>
 				<ul class='menu grow shrink menu-md overflow-y-auto text-base' data-ui='sidebar-nav-list'>
 					{navItems.map((item) => {
 						const isActive = isActiveRoute(item.href)
@@ -108,7 +108,7 @@ const isActiveRoute = (href: string) => normalizePath(href) === currentPath
 									aria-current={isActive ? 'page' : undefined}
 									data-ui={`sidebar-nav-link-${itemToken}`}
 									class:list={[
-										'menu-link px-2 py-2 text-[0.95rem] font-medium transition-colors duration-200 text-center justify-center',
+										'menu-link px-2 py-2 text-[0.95rem] font-medium transition-colors duration-200 text-center justify-center max-[360px]:py-1.5 max-[360px]:text-[0.88rem]',
 										'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-base-200',
 										isActive
 											? 'bg-success/10 text-success hover:bg-success/10'
@@ -131,6 +131,15 @@ const isActiveRoute = (href: string) => normalizePath(href) === currentPath
 </aside>
 
 <style>
+	@media (max-width: 1023px) {
+		[data-ui='sidebar'] {
+			padding-top: max(1rem, env(safe-area-inset-top));
+			padding-left: max(1rem, env(safe-area-inset-left));
+			padding-right: max(1rem, env(safe-area-inset-right));
+			padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+		}
+	}
+
 	.navbar-image-static {
 		animation: none !important;
 		transform: none !important;

@@ -10,6 +10,7 @@ type Viewport = {
 };
 
 const viewports: ReadonlyArray<Viewport> = [
+  { name: 'Mobile Compact', width: 320, height: 568, isMobile: true },
   { name: 'Mobile Small', width: 375, height: 667, isMobile: true },
   { name: 'Mobile Medium', width: 414, height: 896, isMobile: true },
   { name: 'Tablet', width: 768, height: 1024, isMobile: false },
